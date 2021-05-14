@@ -6,7 +6,7 @@ let privateKey =
   'xxx';
 const HttpProvider = TronWeb.providers.HttpProvider;
 
-// tronWeb.setHeader({ 'f51b366a-80b4-44de-8b35-5d0f26370900': 'your api key' });
+// tronWeb.setHeader({ 'xxxxxxxxxxxxxxxxxxxxxxxx': 'your api key' });
 
 // shasta - TEvrLVLkcDpnSZb9G6AwVnWAR91SbTLBa1
 //nile - TQb1aN3aXVoZM2kikSoZfFbXda4hK8R44w
