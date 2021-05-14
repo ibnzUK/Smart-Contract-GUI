@@ -1,4 +1,4 @@
-![Preview](public/assets/screenshot.png)
+![Preview](src/assets/screenshot.png)
 
 This is a React experimental application to fetch Smart contract details
 
