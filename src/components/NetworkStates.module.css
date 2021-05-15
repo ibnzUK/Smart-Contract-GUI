@@ -1,0 +1,39 @@
+
+.button3states {
+    margin: 0.4em;
+    font-size: 0.9em;
+  }
+  
+  .state1 {
+    margin-top: 0.5em;
+    background-color: rgb(255, 255, 255);
+    border: none;
+    color: #a7a7a7;
+    margin-right: 0.3em;
+    width: 5em;
+    height: 1.2em;
+    padding: 0px;
+    border-radius: 0;
+  }
+  .state1:hover {
+    background: none;
+    color: #4e4e4e;
+  }
+  .state2:hover {
+    background: none;
+    color: #ec0606;
+  }
+  
+  .state2 {
+    background-color: rgb(255, 255, 255);
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: solid rgb(231, 3, 3) 2px;
+    color: #ec0606;
+    margin-right: 0.3em;
+    width: 5em;
+    height: 1.2em;
+    padding: 0px;
+    border-radius: 0;
+  }

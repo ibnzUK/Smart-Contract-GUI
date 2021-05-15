@@ -17,9 +17,26 @@
 
 .header {
   color: rgb(235, 11, 11);
-  margin: 3em;
-  /* display: flex; */
 }
+
+.headerTop {
+  display: flex;
+  justify-content: space-between;
+}
+.headerTop p {
+    text-align: center;
+    color: #5c5c5c;
+}
+
+.myAddress {
+  text-align: center;
+  font-size: small;
+  padding-bottom: 0.5em;
+  color: rgba(119, 119, 119, 0.767);
+}
+
+
+
 
 .header h1 {
   text-align: center;
@@ -35,34 +52,32 @@
   padding-top: 1em;
 }
 
-button {
-    padding: 1em;
-    border-radius: 0.5em;
-    background: rgb(49, 49, 49);
-    color: white;
-font-size: 1em;
+.contrctButton {
+  padding: 1em;
+  border-radius: 0.5em;
+  background: rgb(49, 49, 49);
+  color: white;
+  font-size: 1em;
 }
 
-button:hover {
-    background: #161616; /* Green */
-    color: rgb(255, 255, 255);
-  }
-
+.contrctButton:hover {
+  background: #161616; /* Green */
+  color: rgb(255, 255, 255);
+}
 
 .inputField {
-    width: 50%;
-    height: 3em;
-    border-radius: 10px;
-    border-width:0px;
-    font-size: 1.1em;
-    text-align: center;
+    color: rgb(119, 119, 119);
+  width: 50%;
+  height: 3em;
+  border-radius: 10px;
+  border-width: 0px;
+  font-size: 1.1em;
+  text-align: center;
 }
 
-
-.inputField:focus {outline:none!important;}
-
-
-
+.inputField:focus {
+  outline: none !important;
+}
 
 
 .foot {
@@ -73,7 +88,7 @@ button:hover {
 
 .foot h4 {
   text-align: center;
- font-size: 0.7em;
-font-family: sans-serif;
-color: rgb(145, 145, 145);
+  font-size: 0.7em;
+  font-family: sans-serif;
+  color: rgb(145, 145, 145);
 }

@@ -1,23 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import classes from './Card.module.css';
+import NetworkStates from './NetworkStates';
+import Refresh from './Refresh';
+import TronlinkFunctions from './TronlinkFunctions';
 
 const TronWeb = require('tronweb');
-let privateKey =
-  'xxx';
+let privateKey = process.env.PK;
 const HttpProvider = TronWeb.providers.HttpProvider;
 
 // tronWeb.setHeader({ 'xxxxxxxxxxxxxxxxxxxxxxxx': 'your api key' });
 
 // shasta - TEvrLVLkcDpnSZb9G6AwVnWAR91SbTLBa1
 //nile - TQb1aN3aXVoZM2kikSoZfFbXda4hK8R44w
-
-// let tronlinkAddress = getAddressFromTronlink;
+//MAINNET - TSYmsMxx2m9b5o8ZDLXT2fAGSXNY2RgDL6
 
 const Card = () => {
-  const [myAddress, setmyAddress] = useState('n');
+  const [myAddress, setmyAddress] = useState('Loading...');
   const [contrAdrress, setcontrAdrress] = useState('');
   const [contractName, setcontractName] = useState('null');
-  const [network, setNetwork] = useState('SHASTA Testnet');
+  const [network, setNetwork] = useState('SHASTA');
   //set nodes
   const [fullNode, setfullNode] = useState('https://api.shasta.trongrid.io');
   const [solidityNode, setSolidityNode] = useState(
@@ -29,33 +30,35 @@ const Card = () => {
   const tronWeb = new TronWeb(fullNode, solidityNode, eventServer, privateKey);
 
   useEffect(() => {
-    doSomething();
+    fetchAddressfromTronlink();
   });
 
-  const changeNetworkHandler = () => {
-    if (network === 'SHASTA Testnet') {
+  const changeNetworkHandler = (net) => {
+    if (net === 'SHASTA') {
+      setfullNode('https://api.shasta.trongrid.io');
+      setSolidityNode('https://api.shasta.trongrid.io');
+      setEventServer('https://api.shasta.trongrid.io');
+
+      setNetwork('SHASTA');
+    } else if (net === 'MAIN') {
       setfullNode(new HttpProvider('https://api.trongrid.io'));
       setSolidityNode(new HttpProvider('https://api.trongrid.io'));
       setEventServer(new HttpProvider('https://api.trongrid.io'));
 
-      setNetwork('MAINNET');
-    } else {
-      setfullNode('https://api.shasta.trongrid.io');
-      setSolidityNode('https://api.shasta.trongrid.io');
-      setEventServer('https://api.shasta.trongrid.io');
-      setNetwork('SHASTA Testnet');
+      setNetwork('MAIN');
+    } else if (net === 'NILE') {
+      setfullNode('https://api.nileex.io');
+      setSolidityNode('https://api.nileex.io');
+      setEventServer('https://api.nileex.io');
+      setNetwork('NILE');
     }
   };
 
-  const doSomething = async () => {
+  const fetchAddressfromTronlink = async () => {
     try {
-        
-    setTimeout(() => {
-
-      
-      setmyAddress(window.tronWeb.defaultAddress.base58);
-    }, 1000);
-      
+      setTimeout(() => {
+        setmyAddress(window.tronWeb.defaultAddress.base58);
+      }, 1000);
     } catch (error) {
       console.error('not able to fetch ', error);
       setmyAddress(error);
@@ -63,6 +66,7 @@ const Card = () => {
   };
 
   const getContractName = async () => {
+    fetchAddressfromTronlink();
     try {
       //   let contract = await tronWeb.contract().at(contrAdrress);
       //   let result = await contract.name().call();
@@ -82,21 +86,36 @@ const Card = () => {
     setcontrAdrress(event.target.value);
   };
 
+  const doSomething = async () => {
+    var tronweb = window.tronWeb;
+    const tx = await tronweb.transactionBuilder.sendTrx(
+      'TGupi94VaCpm9DaTvne6WaytYbTLA69m5Y',
+      1,
+      myAddress
+    );
+    const signedTx = await tronweb.trx.sign(tx);
+    const broastTx = await tronweb.trx.sendRawTransaction(signedTx);
+    console.log(broastTx);
+  };
+
   return (
     <div className={classes.cardGrid}>
       <div className={classes.card}>
         <div className={classes.header}>
+          <div className={classes.headerTop}>
+            <NetworkStates
+              networkState={network}
+              changeNetwork={changeNetworkHandler}
+            />
+            <Refresh fetchAddress={fetchAddressfromTronlink} />
+          </div>
           <h1>SMART CONTRACT GUI</h1>
         </div>
-        <div className={classes.content}>
-          <p>selected network: {network}</p>
-          <button onClick={changeNetworkHandler}>
-            Change to{' '}
-            {network === 'SHASTA Testnet' ? `MAINNET` : 'SHASTA Testnet'}{' '}
-          </button>
+        <p className={classes.myAddress}>
+          Network (<b>{network}</b>): {myAddress}
+        </p>
 
-          <p>{myAddress}</p>
-          <button onClick={doSomething}>Fetch Address</button>
+        <div className={classes.content}>
           <br></br>
           <p>Smart contract name: {contractName}</p>
           <input
@@ -107,11 +126,12 @@ const Card = () => {
           <div>
             <br></br>
           </div>
-          <button onClick={getContractName}>Get smart contract name</button>
+          <button onClick={getContractName} className={classes.contrctButton}>Get smart contract name</button>
+          <TronlinkFunctions clicked={doSomething} />
         </div>
 
         <div className={classes.foot}>
-          <h4>App Version - 00.01 beta</h4>
+          <h4>App Version - 0.02 beta</h4>
         </div>
       </div>
     </div>
