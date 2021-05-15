@@ -2,9 +2,9 @@
 
 This is a React experimental application to fetch Smart contract details
 
-## Community codders, please commit
+## Community coders, please commit
 
-Feel free to add extra functions or improvements, This helps me to more familiarise with source control and open source project managing
+Feel free to add extra functions or improvements, This helps me to more familiarise myself with source control and open source project managing
 
 ## Running instructions
 
@@ -13,7 +13,7 @@ Feel free to add extra functions or improvements, This helps me to more familiar
 - make sure you have node.js installed on your machine
 - install project packages (npm install)
 - replace privateKey = 'xxx'; with your private key
-- start project (npm run start)
+- start a project (npm run start)
 
 
 ## Changes in V 0.02
