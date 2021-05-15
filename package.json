@@ -36,5 +36,5 @@
   "devDependencies": {},
   "author": "Justinas Kairys",
   "license": "ISC",
-  "description": ""
+  "description": "Experimental React, Blockchain project to provide graphical user interface for smart contracts on Tron network"
 }
