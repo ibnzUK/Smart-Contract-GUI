@@ -14,3 +14,12 @@ Feel free to add extra functions or improvements, This helps me to more familiar
 - install project packages (npm install)
 - replace privateKey = 'xxx'; with your private key
 - start project (npm run start)
+
+
+## Changes in V 0.02
+
+- Integrated ability to refresh GUI (mainly after Tronlink address swap)
+- Added experimental Tronlink trigger option for cryptocurrency sending
+- Added ability to select test net Nile, Shasta or Main Tron network
+- UI Improvements
+
