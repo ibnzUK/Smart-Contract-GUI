@@ -1,8 +1,8 @@
 .cardGrid {
-  height: 93em;
+  height: auto;
   display: grid;
   grid-template-columns: auto 20em 50em 20em auto;
-  grid-template-rows: 20em auto auto;
+  grid-template-rows: 20em auto auto 10em;
 }
 
 .card {
@@ -47,9 +47,15 @@
 
 .content {
   background: rgba(235, 235, 235, 0.589);
-  height: 50em;
+  height: auto;
   text-align: center;
-  padding-top: 1em;
+  padding-top: 10em;
+}
+
+.functionLi {
+  /* background-color: brown; */
+  /* padding-left: 5em;
+  padding-right: 5em; */
 }
 
 .contrctButton {
@@ -84,6 +90,8 @@
   position: absolute;
   bottom: 0;
   width: 100%;
+  background-color: white;
+
 }
 
 .foot h4 {

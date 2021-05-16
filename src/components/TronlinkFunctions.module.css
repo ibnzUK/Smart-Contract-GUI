@@ -1,7 +1,9 @@
 .experimental {
-  margin-top: 30em;
+  margin-top: 15em;
+  margin-bottom: 4em;
   display: flex;
   justify-content: center;
+
 }
 
 .tronlinkButton {

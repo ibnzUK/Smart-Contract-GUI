@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import classes from './Card.module.css';
+import ContractExtracted from './ContractExtracted';
 import NetworkStates from './NetworkStates';
 import Refresh from './Refresh';
 import TronlinkFunctions from './TronlinkFunctions';
@@ -13,11 +14,14 @@ const HttpProvider = TronWeb.providers.HttpProvider;
 // shasta - TEvrLVLkcDpnSZb9G6AwVnWAR91SbTLBa1
 //nile - TQb1aN3aXVoZM2kikSoZfFbXda4hK8R44w
 //MAINNET - TSYmsMxx2m9b5o8ZDLXT2fAGSXNY2RgDL6
+//MAIN USDT - TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t
+
 
 const Card = () => {
   const [myAddress, setmyAddress] = useState('Loading...');
   const [contrAdrress, setcontrAdrress] = useState('');
   const [contractName, setcontractName] = useState('null');
+  const [fetchedFuncs, setFetchedFuncs] = useState([]);
   const [network, setNetwork] = useState('SHASTA');
   //set nodes
   const [fullNode, setfullNode] = useState('https://api.shasta.trongrid.io');
@@ -73,8 +77,7 @@ const Card = () => {
       let contract = await tronWeb.trx.getContract(contrAdrress);
       let result = await contract.name;
       setcontractName(result);
-
-      console.log(contract.abi.entrys[1].name);
+      setFetchedFuncs(contract.abi.entrys)
     } catch (error) {
       console.error('trigger smart contract error', error);
       setcontractName(error);
@@ -116,8 +119,20 @@ const Card = () => {
         </p>
 
         <div className={classes.content}>
-          <br></br>
-          <p>Smart contract name: {contractName}</p>
+          <h4>Smart contract name: {contractName}</h4>
+     
+
+<div className={classes.functionLi}>
+{fetchedFuncs.map((func) => (
+            <ContractExtracted
+              functionName={func.name}
+              id={func.id}
+              key={Math.random()}
+              stateMutability={func.stateMutability}
+            />
+          ))}
+</div>
+     
           <input
             type="text"
             onChange={contractImputHandler}
@@ -126,12 +141,14 @@ const Card = () => {
           <div>
             <br></br>
           </div>
-          <button onClick={getContractName} className={classes.contrctButton}>Get smart contract name</button>
+          <button onClick={getContractName} className={classes.contrctButton}>
+            Get smart contract details
+          </button>
           <TronlinkFunctions clicked={doSomething} />
         </div>
 
         <div className={classes.foot}>
-          <h4>App Version - 0.02 beta</h4>
+          <h4>App Version - 0.03 beta</h4>
         </div>
       </div>
     </div>

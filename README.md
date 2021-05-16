@@ -23,3 +23,10 @@ Feel free to add extra functions or improvements, This helps me to more familiar
 - Added ability to select test net Nile, Shasta or Main Tron network
 - UI Improvements
 
+## Changes in V 0.03
+
+- Added ability to get Smart contract details
+- Added ability to fetch and render Smart contract functions
+- Added grid for Smart contract rendering
+- Optimised UI for large list of functions
+

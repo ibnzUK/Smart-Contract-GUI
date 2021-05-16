@@ -1,0 +1,33 @@
+.functionItems {
+  /* background-color: aquamarine; */
+  /* display: flex; */
+
+    /* justify-content:  space-evenly ; */
+
+    text-align: left;
+  
+  
+}
+.listGrid {
+  
+display: grid;
+grid-template-columns: 7em 11em 20em 5em auto;
+}
+
+
+.functionLabel {
+  /* margin-right: 5em; */
+/* text-align: right; */
+margin-right: 1em;
+grid-column-start: 2;
+border: none;
+background-color: white;
+color: crimson;
+
+}
+
+
+.functionInput {
+   
+    border: none;
+}
