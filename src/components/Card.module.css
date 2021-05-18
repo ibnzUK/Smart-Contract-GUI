@@ -66,6 +66,17 @@
   font-size: 1em;
 }
 
+.contrctButton2 {
+  padding: 1em;
+  border-radius: 0.5em;
+  background: rgb(90, 18, 158);
+  color: white;
+  font-size: 1em;
+}
+
+
+
+
 .contrctButton:hover {
   background: #161616; /* Green */
   color: rgb(255, 255, 255);

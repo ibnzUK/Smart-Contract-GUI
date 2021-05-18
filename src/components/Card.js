@@ -16,7 +16,6 @@ const HttpProvider = TronWeb.providers.HttpProvider;
 //MAINNET - TSYmsMxx2m9b5o8ZDLXT2fAGSXNY2RgDL6
 //MAIN USDT - TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t
 
-
 const Card = () => {
   const [myAddress, setmyAddress] = useState('Loading...');
   const [contrAdrress, setcontrAdrress] = useState('');
@@ -77,7 +76,7 @@ const Card = () => {
       let contract = await tronWeb.trx.getContract(contrAdrress);
       let result = await contract.name;
       setcontractName(result);
-      setFetchedFuncs(contract.abi.entrys)
+      setFetchedFuncs(contract.abi.entrys);
     } catch (error) {
       console.error('trigger smart contract error', error);
       setcontractName(error);
@@ -93,12 +92,50 @@ const Card = () => {
     var tronweb = window.tronWeb;
     const tx = await tronweb.transactionBuilder.sendTrx(
       'TGupi94VaCpm9DaTvne6WaytYbTLA69m5Y',
-      1,
+      1000000,
       myAddress
     );
     const signedTx = await tronweb.trx.sign(tx);
     const broastTx = await tronweb.trx.sendRawTransaction(signedTx);
     console.log(broastTx);
+  };
+
+  const sendTokens = async () => {
+    const privateKey = 'XXX';
+
+    const addressList = [
+      { userAdr: 'TGupi94VaCpm9DaTvne6WaytYbTLA69m5Y', userAmount: 1000000 },
+    ];
+    const timInterval = 2;
+
+    // var toAddress = 'TGupi94VaCpm9DaTvne6WaytYbTLA69m5Y'; //address _to
+    // var amount = 10000000; //amount 10,000000 = 10 TRX
+
+    //Creates an unsigned TRX transfer transaction
+    console.log('Loading..');
+    const promises = addressList.map(
+      (address, i) =>
+        new Promise((resolve) =>
+          setTimeout(async () => {
+            const tradeobj = await tronWeb.transactionBuilder.sendTrx(
+              address.userAdr,
+              address.userAmount,
+              myAddress
+            );
+            const signedtxn = await tronWeb.trx.sign(tradeobj, privateKey);
+            const receipt = await tronWeb.trx.sendRawTransaction(signedtxn);
+            console.log('- Output:', receipt, '\n');
+
+            console.log(
+              'address:' + address.userAdr,
+              'amount to send: ' + address.userAmount + ' TRX'
+            );
+
+            resolve();
+          }, timInterval * 1000 * addressList.length - timInterval * 1000 * i)
+        )
+    );
+    Promise.all(promises).then(() => console.log('all done'));
   };
 
   return (
@@ -120,19 +157,18 @@ const Card = () => {
 
         <div className={classes.content}>
           <h4>Smart contract name: {contractName}</h4>
-     
 
-<div className={classes.functionLi}>
-{fetchedFuncs.map((func) => (
-            <ContractExtracted
-              functionName={func.name}
-              id={func.id}
-              key={Math.random()}
-              stateMutability={func.stateMutability}
-            />
-          ))}
-</div>
-     
+          <div className={classes.functionLi}>
+            {fetchedFuncs.map((func) => (
+              <ContractExtracted
+                functionName={func.name}
+                id={func.id}
+                key={Math.random()}
+                stateMutability={func.stateMutability}
+              />
+            ))}
+          </div>
+
           <input
             type="text"
             onChange={contractImputHandler}
@@ -144,6 +180,11 @@ const Card = () => {
           <button onClick={getContractName} className={classes.contrctButton}>
             Get smart contract details
           </button>
+          <div>
+            <button onClick={sendTokens} className={classes.contrctButton2}>
+              SendToken without tronlink
+            </button>
+          </div>
           <TronlinkFunctions clicked={doSomething} />
         </div>
 
