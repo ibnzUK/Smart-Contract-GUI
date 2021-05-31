@@ -93,7 +93,7 @@
 }
 
 .inputField:focus {
-  outline: none !important;
+  outline: none;
 }
 
 

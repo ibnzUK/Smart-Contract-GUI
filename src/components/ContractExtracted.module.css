@@ -2,32 +2,68 @@
   /* background-color: aquamarine; */
   /* display: flex; */
 
-    /* justify-content:  space-evenly ; */
+  /* justify-content:  space-evenly ; */
 
-    text-align: left;
-  
-  
+  text-align: left;
 }
 .listGrid {
-  
-display: grid;
-grid-template-columns: 7em 11em 20em 5em auto;
+  display: grid;
+  grid-template-columns: 7em 11em 20em 5em auto;
 }
-
 
 .functionLabel {
-  /* margin-right: 5em; */
-/* text-align: right; */
-margin-right: 1em;
-grid-column-start: 2;
-border: none;
-background-color: white;
-color: crimson;
+  margin-right: 1em;
+  grid-column-start: 2;
+  border: none;
+  background-color: white;
+  color: crimson;
+}
 
+.nonfunctionLabel {
+  margin-right: 1em;
+  grid-column-start: 2;
+  border: none;
+  background-color: white;
+  color: rgb(5, 117, 65);
+}
+
+.functionInput {
+  border: none;
+  padding: 0.6em;
+  text-align: center;
+  
+}
+.functionInput:focus {
+ outline: none;
 }
 
 
-.functionInput {
-   
-    border: none;
+.functionCallBtn {
+  border: rgb(1, 145, 89) 0.1em solid;
+  background-color: rgb(255, 255, 255);
+  border-radius: 0.5em;
+  color: rgb(1, 145, 89);
+  padding: 0.6em;
+}
+
+.functionCallBtn:hover {
+  border: rgb(255, 255, 255) 0.1em solid;
+  background-color: rgb(1, 145, 89);
+  cursor: pointer;
+  color: white;
+}
+
+.freeFunctionCallBtn {
+  border: rgb(228, 3, 3) 0.1em solid;
+  background-color: rgb(255, 255, 255);
+  border-radius: 0.5em;
+  color: rgb(228, 3, 3);
+  padding: 0.6em;
+}
+
+.freeFunctionCallBtn:hover {
+  border: rgb(255, 255, 255) 0.1em solid;
+  background-color: rgb(228, 3, 3);
+  cursor: pointer;
+  color: white;
 }

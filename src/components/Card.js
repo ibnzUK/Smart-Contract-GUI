@@ -33,8 +33,13 @@ const Card = () => {
   const tronWeb = new TronWeb(fullNode, solidityNode, eventServer, privateKey);
 
   useEffect(() => {
-    fetchAddressfromTronlink();
-  });
+    //connecting to ethereum blockchain
+    const ethEnabled = async () => {
+      fetchAddressfromTronlink();
+    };
+
+    ethEnabled();
+  }, []);
 
   const changeNetworkHandler = (net) => {
     if (net === 'SHASTA') {
@@ -76,7 +81,10 @@ const Card = () => {
       let contract = await tronWeb.trx.getContract(contrAdrress);
       let result = await contract.name;
       setcontractName(result);
+      console.log(result);
       setFetchedFuncs(contract.abi.entrys);
+      console.log(contract.abi.entrys);
+
     } catch (error) {
       console.error('trigger smart contract error', error);
       setcontractName(error);
@@ -88,7 +96,7 @@ const Card = () => {
     setcontrAdrress(event.target.value);
   };
 
-  const doSomething = async () => {
+  const tronlinkTest = async () => {
     var tronweb = window.tronWeb;
     const tx = await tronweb.transactionBuilder.sendTrx(
       'TGupi94VaCpm9DaTvne6WaytYbTLA69m5Y',
@@ -98,44 +106,6 @@ const Card = () => {
     const signedTx = await tronweb.trx.sign(tx);
     const broastTx = await tronweb.trx.sendRawTransaction(signedTx);
     console.log(broastTx);
-  };
-
-  const sendTokens = async () => {
-    const privateKey = 'XXX';
-
-    const addressList = [
-      { userAdr: 'TGupi94VaCpm9DaTvne6WaytYbTLA69m5Y', userAmount: 1000000 },
-    ];
-    const timInterval = 2;
-
-    // var toAddress = 'TGupi94VaCpm9DaTvne6WaytYbTLA69m5Y'; //address _to
-    // var amount = 10000000; //amount 10,000000 = 10 TRX
-
-    //Creates an unsigned TRX transfer transaction
-    console.log('Loading..');
-    const promises = addressList.map(
-      (address, i) =>
-        new Promise((resolve) =>
-          setTimeout(async () => {
-            const tradeobj = await tronWeb.transactionBuilder.sendTrx(
-              address.userAdr,
-              address.userAmount,
-              myAddress
-            );
-            const signedtxn = await tronWeb.trx.sign(tradeobj, privateKey);
-            const receipt = await tronWeb.trx.sendRawTransaction(signedtxn);
-            console.log('- Output:', receipt, '\n');
-
-            console.log(
-              'address:' + address.userAdr,
-              'amount to send: ' + address.userAmount + ' TRX'
-            );
-
-            resolve();
-          }, timInterval * 1000 * addressList.length - timInterval * 1000 * i)
-        )
-    );
-    Promise.all(promises).then(() => console.log('all done'));
   };
 
   return (
@@ -165,6 +135,8 @@ const Card = () => {
                 id={func.id}
                 key={Math.random()}
                 stateMutability={func.stateMutability}
+                type={func.type}
+                inputs={func.inputs}
               />
             ))}
           </div>
@@ -180,16 +152,12 @@ const Card = () => {
           <button onClick={getContractName} className={classes.contrctButton}>
             Get smart contract details
           </button>
-          <div>
-            <button onClick={sendTokens} className={classes.contrctButton2}>
-              SendToken without tronlink
-            </button>
-          </div>
-          <TronlinkFunctions clicked={doSomething} />
+          <div></div>
+          <TronlinkFunctions clicked={tronlinkTest} />
         </div>
 
         <div className={classes.foot}>
-          <h4>App Version - 0.03 beta</h4>
+          <h4>App Version - 0.04 beta</h4>
         </div>
       </div>
     </div>
