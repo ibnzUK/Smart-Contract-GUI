@@ -31,7 +31,7 @@ const Card = () => {
     'https://api.shasta.trongrid.io'
   );
   const tronWeb = new TronWeb(fullNode, solidityNode, eventServer, privateKey);
-  const [contractValue, setContractValue] = useState('');
+  const [contractValue, setContractValue] = useState('Smart contract not detected');
 
   useEffect(() => {
     //connecting to ethereum blockchain
