@@ -31,7 +31,9 @@ const Card = () => {
     'https://api.shasta.trongrid.io'
   );
   const tronWeb = new TronWeb(fullNode, solidityNode, eventServer, privateKey);
-  const [contractValue, setContractValue] = useState('Smart contract not detected');
+  const [contractValue, setContractValue] = useState(
+    'Smart contract not detected'
+  );
 
   useEffect(() => {
     //connecting to ethereum blockchain
@@ -107,14 +109,25 @@ const Card = () => {
     console.log(broastTx);
   };
 
-  const callFunctions = async (args) => {
+  const callFunctions = async (args, type) => {
     let contract = await tronWeb.contract().at(contrAdrress);
     tronWeb.setAddress(myAddress);
 
-    let currentValue = await contract[args].call().call();
+    
+    if (type === 'Free') {
+      let currentValue = await contract[args].call().call();
+      setContractValue(currentValue.toString());
+    } else if (type === 'Nonpayable') {
+      // let currentValue = await contract.deleteData().send({
+      //   feeLimit: 1000000,
+      // });
+      // setContractValue(currentValue.toString());
+      console.log('nonpayable ');
 
-    setContractValue(currentValue.toString())
+    }
+  
   };
+
 
   return (
     <div className={classes.cardGrid}>
@@ -134,9 +147,8 @@ const Card = () => {
         </p>
 
         <div className={classes.content}>
-          
           <div>
-          <p>{contractValue}</p>
+            <p>{contractValue}</p>
           </div>
           <h4>Smart contract name: {contractName}</h4>
 
@@ -150,7 +162,6 @@ const Card = () => {
                 type={func.type}
                 inputs={func.inputs}
                 callFunctions={callFunctions}
-              
               />
             ))}
           </div>
