@@ -2,28 +2,32 @@ import React from 'react';
 import classes from './ContractExtracted.module.css';
 
 const ContractExtracted = (props) => {
-  console.log(props.type);
-  const functionBtnClicked = () => {
-    console.log('boo');
-  };
 
+  const functionBtnClicked = (args) => {
+    props.callFunctions(args);
+ 
+  };
   let editableFunction = <p>Unknow Type</p>;
 
   if (props.stateMutability === 'View') {
     editableFunction = (
-      <button className={classes.functionCallBtn}>CALL FREE FUNCTION</button>
+      <button className={classes.functionCallBtn} onClick={() => {functionBtnClicked(props.functionName)}}>
+        CALL FREE FUNCTION
+      </button>
     );
     if (props.inputs) {
       editableFunction = (
-        <input
-          type="text"
-          className={classes.functionInput}
-        ></input>
+        <input type="text" className={classes.functionInput}></input>
       );
     }
+  } else if (props.type === 'Constructor') {
+    return null;
   } else {
     editableFunction = (
-      <button className={classes.freeFunctionCallBtn} onClick={functionBtnClicked}>
+      <button
+        className={classes.freeFunctionCallBtn}
+        onClick={() => {functionBtnClicked(props.functionName)}}
+      >
         CALL FUNCTION
       </button>
     );

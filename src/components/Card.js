@@ -31,6 +31,7 @@ const Card = () => {
     'https://api.shasta.trongrid.io'
   );
   const tronWeb = new TronWeb(fullNode, solidityNode, eventServer, privateKey);
+  const [contractValue, setContractValue] = useState('');
 
   useEffect(() => {
     //connecting to ethereum blockchain
@@ -81,10 +82,8 @@ const Card = () => {
       let contract = await tronWeb.trx.getContract(contrAdrress);
       let result = await contract.name;
       setcontractName(result);
-      console.log(result);
-      setFetchedFuncs(contract.abi.entrys);
-      console.log(contract.abi.entrys);
 
+      setFetchedFuncs(contract.abi.entrys);
     } catch (error) {
       console.error('trigger smart contract error', error);
       setcontractName(error);
@@ -108,6 +107,15 @@ const Card = () => {
     console.log(broastTx);
   };
 
+  const callFunctions = async (args) => {
+    let contract = await tronWeb.contract().at(contrAdrress);
+    tronWeb.setAddress(myAddress);
+
+    let currentValue = await contract[args].call().call();
+
+    setContractValue(currentValue.toString())
+  };
+
   return (
     <div className={classes.cardGrid}>
       <div className={classes.card}>
@@ -126,6 +134,10 @@ const Card = () => {
         </p>
 
         <div className={classes.content}>
+          
+          <div>
+          <p>{contractValue}</p>
+          </div>
           <h4>Smart contract name: {contractName}</h4>
 
           <div className={classes.functionLi}>
@@ -137,6 +149,8 @@ const Card = () => {
                 stateMutability={func.stateMutability}
                 type={func.type}
                 inputs={func.inputs}
+                callFunctions={callFunctions}
+              
               />
             ))}
           </div>

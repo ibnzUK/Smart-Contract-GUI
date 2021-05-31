@@ -30,3 +30,8 @@ Feel free to add extra functions or improvements, This helps me to more familiar
 - Added grid for Smart contract rendering
 - Optimised UI for large list of functions
 
+## Changes in V 0.04
+
+- Sorting functions in to read only , trigger and input
+- Implemented ability to check free contract functions 
+
