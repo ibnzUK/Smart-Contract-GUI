@@ -113,7 +113,6 @@ const Card = () => {
     let contract = await tronWeb.contract().at(contrAdrress);
     tronWeb.setAddress(myAddress);
 
-    
     if (type === 'Free') {
       let currentValue = await contract[args].call().call();
       setContractValue(currentValue.toString());
@@ -123,11 +122,37 @@ const Card = () => {
       // });
       // setContractValue(currentValue.toString());
       console.log('nonpayable ');
-
     }
-  
   };
 
+  const doSomething = async () => {
+    let contract = await tronWeb
+      .contract()
+      .at('TEvrLVLkcDpnSZb9G6AwVnWAR91SbTLBa1');
+    tronWeb.setAddress('TBNZd3tqJuPYTtVGwDeR4wPNgBseX1QbAH');
+    // let currentValue = await contract.deleteData().send({
+    //   feeLimit: 1000000,
+    // });
+
+    var tronweb = window.tronWeb;
+    var parameter = [
+      // { type: 'address', value: 'TBNZd3tqJuPYTtVGwDeR4wPNgBseX1QbAH' },
+    ];
+    var options = {
+      feeLimit: 100000000,
+    };
+
+    const tx = await tronWeb.transactionBuilder.triggerSmartContract(
+      contract,
+      'deleteData()',
+      options,
+      parameter,
+      'TBNZd3tqJuPYTtVGwDeR4wPNgBseX1QbAH'
+    );
+    const signedTx = await tronweb.trx.sign(tx);
+    const broastTx = await tronweb.trx.sendRawTransaction(signedTx);
+    console.log(broastTx);
+  };
 
   return (
     <div className={classes.cardGrid}>
@@ -177,7 +202,9 @@ const Card = () => {
           <button onClick={getContractName} className={classes.contrctButton}>
             Get smart contract details
           </button>
-          <div></div>
+          <div>
+            <button onClick={doSomething}>TESTING</button>
+          </div>
           <TronlinkFunctions clicked={tronlinkTest} />
         </div>
 
