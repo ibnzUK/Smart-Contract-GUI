@@ -11,6 +11,8 @@ const HttpProvider = TronWeb.providers.HttpProvider;
 
 // tronWeb.setHeader({ 'xxxxxxxxxxxxxxxxxxxxxxxx': 'your api key' });
 
+//shasta set message read message  - TC7Gg5AkhDjiDEuqE1sPkFudRAERBSdVMx
+
 // shasta - TEvrLVLkcDpnSZb9G6AwVnWAR91SbTLBa1
 //nile - TQb1aN3aXVoZM2kikSoZfFbXda4hK8R44w
 //MAINNET - TSYmsMxx2m9b5o8ZDLXT2fAGSXNY2RgDL6
@@ -126,29 +128,29 @@ const Card = () => {
   };
 
   const doSomething = async () => {
-    let contract = await tronWeb
-      .contract()
-      .at('TEvrLVLkcDpnSZb9G6AwVnWAR91SbTLBa1');
-    tronWeb.setAddress('TBNZd3tqJuPYTtVGwDeR4wPNgBseX1QbAH');
-    // let currentValue = await contract.deleteData().send({
-    //   feeLimit: 1000000,
-    // });
-
     var tronweb = window.tronWeb;
-    var parameter = [
-      // { type: 'address', value: 'TBNZd3tqJuPYTtVGwDeR4wPNgBseX1QbAH' },
-    ];
+    var parameter = [{ type: '_string', value: 'HELLO' }];
     var options = {
       feeLimit: 100000000,
     };
 
-    const tx = await tronWeb.transactionBuilder.triggerSmartContract(
-      contract,
-      'deleteData()',
-      options,
-      parameter,
-      'TBNZd3tqJuPYTtVGwDeR4wPNgBseX1QbAH'
-    );
+    let contract = await tronWeb
+      .contract()
+      .at('TC7Gg5AkhDjiDEuqE1sPkFudRAERBSdVMx');
+    tronWeb.setAddress('TBNZd3tqJuPYTtVGwDeR4wPNgBseX1QbAH');
+    let tx = await contract.setMessage().send({
+      feeLimit: 100000000,
+      shouldPollResponse: true,
+      callValue: 0,
+    });
+
+    // const tx = await tronWeb.transactionBuilder.triggerSmartContract(
+    //   contract,
+    //   'setMessage()',
+    //   options,
+    //   parameter,
+    //   'TBNZd3tqJuPYTtVGwDeR4wPNgBseX1QbAH'
+    // );
     const signedTx = await tronweb.trx.sign(tx);
     const broastTx = await tronweb.trx.sendRawTransaction(signedTx);
     console.log(broastTx);
