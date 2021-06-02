@@ -3,18 +3,25 @@ import classes from './ContractExtracted.module.css';
 
 const ContractExtracted = (props) => {
 
+
+  let fname = props.functionName
+  // console.log(props.allFunctions[fname].functionSelector);
+
+
   const functionBtnClicked = (args, fType) => {
     props.callFunctions(args, fType);
- 
   };
-
-
 
   let editableFunction = <p>Unknow Type</p>;
 
   if (props.stateMutability === 'View') {
     editableFunction = (
-      <button className={classes.functionCallBtn} onClick={() => {functionBtnClicked(props.functionName, 'Free')}}>
+      <button
+        className={classes.functionCallBtn}
+        onClick={() => {
+          functionBtnClicked(props.functionName, 'Free');
+        }}
+      >
         CALL FREE FUNCTION
       </button>
     );
@@ -29,7 +36,9 @@ const ContractExtracted = (props) => {
     editableFunction = (
       <button
         className={classes.freeFunctionCallBtn}
-        onClick={() => {functionBtnClicked(props.functionName, 'Nonpayable')}}
+        onClick={() => {
+          functionBtnClicked(props.functionName, 'Nonpayable');
+        }}
       >
         CALL FUNCTION
       </button>

@@ -36,6 +36,7 @@ const Card = () => {
   const [contractValue, setContractValue] = useState(
     'Smart contract not detected'
   );
+  const [contractExtracted, setContractExtracted] = useState([]);
 
   useEffect(() => {
     //connecting to ethereum blockchain
@@ -84,9 +85,10 @@ const Card = () => {
       //   let contract = await tronWeb.contract().at(contrAdrress);
       //   let result = await contract.name().call();
       let contract = await tronWeb.trx.getContract(contrAdrress);
+      let contractextracted = await tronWeb.contract().at(contrAdrress);
       let result = await contract.name;
       setcontractName(result);
-
+      setContractExtracted(contractextracted.methodInstances);
       setFetchedFuncs(contract.abi.entrys);
     } catch (error) {
       console.error('trigger smart contract error', error);
@@ -117,20 +119,30 @@ const Card = () => {
     if (type === 'Free') {
       let currentValue = await contract[args].call().call();
       setContractValue(currentValue.toString());
-      console.log(contract);
-
     } else if (type === 'Nonpayable') {
-
       //triggering red
-      var parameter = [{ type: 'string', value: 'MyMessage1' }];
+      const contractFunction = contract.methodInstances[args].functionSelector;
+      let parameter = [
+        {
+          // type: contract.methodInstances[args].inputs[0].type,
+          name: 'newMessage',
+          type: 'string',
+          value: 'Tede',
+        },
+      ];
+      console.log(parameter);
+      let parameter2 = contractExtracted[args].inputs;
+      console.log(parameter2);
+
       const options = {
         feeLimit: 100000000,
         callValue: 0,
       };
+
       // tronlink building transaction
       const transaction = await tronweb.transactionBuilder.triggerSmartContract(
         contrAdrress,
-        'setMessage(string)',
+        contractFunction,
         options,
         parameter,
         myAddress
@@ -143,9 +155,6 @@ const Card = () => {
       console.log(broastTx);
     }
   };
-
-
-
   return (
     <div className={classes.cardGrid}>
       <div className={classes.card}>
@@ -179,6 +188,7 @@ const Card = () => {
                 type={func.type}
                 inputs={func.inputs}
                 callFunctions={callFunctions}
+                allFunctions={contractExtracted}
               />
             ))}
           </div>
@@ -194,9 +204,7 @@ const Card = () => {
           <button onClick={getContractName} className={classes.contrctButton}>
             Get smart contract details
           </button>
-          <div>
-          
-          </div>
+          <div></div>
           <TronlinkFunctions clicked={tronlinkTest} />
         </div>
 
