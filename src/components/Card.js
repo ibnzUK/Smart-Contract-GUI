@@ -128,32 +128,30 @@ const Card = () => {
   };
 
   const doSomething = async () => {
-    var tronweb = window.tronWeb;
-    var parameter = [{ type: '_string', value: 'HELLO' }];
+    var parameter = [
+      { type: 'address', value: 'TV3nb5HYFe2xBEmyb3ETe93UGkjAhWyzrs' },
+      { type: 'uint256', value: 100 },
+    ];
     var options = {
       feeLimit: 100000000,
-    };
-
-    let contract = await tronWeb
-      .contract()
-      .at('TC7Gg5AkhDjiDEuqE1sPkFudRAERBSdVMx');
-    tronWeb.setAddress('TBNZd3tqJuPYTtVGwDeR4wPNgBseX1QbAH');
-    let tx = await contract.setMessage().send({
-      feeLimit: 100000000,
-      shouldPollResponse: true,
       callValue: 0,
-    });
+      tokenValue: 10,
+      tokenId: 1000001,
+    };
+    // const transaction = await tronWeb.transactionBuilder.triggerSmartContract("419e62be7f4f103c36507cb2a753418791b1cdc182", "transfer(address,uint256)", options,
+    //     parameter,"417946F66D0FC67924DA0AC9936183AB3B07C81126");
 
-    // const tx = await tronWeb.transactionBuilder.triggerSmartContract(
-    //   contract,
-    //   'setMessage()',
-    //   options,
-    //   parameter,
-    //   'TBNZd3tqJuPYTtVGwDeR4wPNgBseX1QbAH'
-    // );
-    const signedTx = await tronweb.trx.sign(tx);
-    const broastTx = await tronweb.trx.sendRawTransaction(signedTx);
-    console.log(broastTx);
+    const transaction = await tronWeb.transactionBuilder.triggerSmartContract(
+      'TC7Gg5AkhDjiDEuqE1sPkFudRAERBSdVMx',
+      'name()',
+      {},
+      parameter,
+      'TBNZd3tqJuPYTtVGwDeR4wPNgBseX1QbAH'
+    );
+    console.log(transaction);
+
+    //'TC7Gg5AkhDjiDEuqE1sPkFudRAERBSdVMx');
+    //TBNZd3tqJuPYTtVGwDeR4wPNgBseX1QbAH');
   };
 
   return (
