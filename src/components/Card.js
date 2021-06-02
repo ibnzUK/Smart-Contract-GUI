@@ -122,17 +122,15 @@ const Card = () => {
     } else if (type === 'Nonpayable') {
       //triggering red
       const contractFunction = contract.methodInstances[args].functionSelector;
-      let parameter = [
+      let objFromContract = contractExtracted[args].inputs;
+      //checking input objects
+      console.log(objFromContract);
+      const parameters = [
         {
-          // type: contract.methodInstances[args].inputs[0].type,
-          name: 'newMessage',
-          type: 'string',
-          value: 'Tede',
+          ...objFromContract[0],
+          value: 'MY MESSAGE2',
         },
       ];
-      console.log(parameter);
-      let parameter2 = contractExtracted[args].inputs;
-      console.log(parameter2);
 
       const options = {
         feeLimit: 100000000,
@@ -144,7 +142,7 @@ const Card = () => {
         contrAdrress,
         contractFunction,
         options,
-        parameter,
+        parameters,
         myAddress
       );
       //tronlink signing transaction

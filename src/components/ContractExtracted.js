@@ -4,7 +4,7 @@ import classes from './ContractExtracted.module.css';
 const ContractExtracted = (props) => {
 
 
-  let fname = props.functionName
+  // let fname = props.functionName
   // console.log(props.allFunctions[fname].functionSelector);
 
 
