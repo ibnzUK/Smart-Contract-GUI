@@ -8,7 +8,7 @@ import TronlinkFunctions from './TronlinkFunctions';
 const TronWeb = require('tronweb');
 let privateKey = process.env.PK;
 const HttpProvider = TronWeb.providers.HttpProvider;
-
+var tronweb = window.tronWeb;
 // tronWeb.setHeader({ 'xxxxxxxxxxxxxxxxxxxxxxxx': 'your api key' });
 
 //shasta set message read message  - TC7Gg5AkhDjiDEuqE1sPkFudRAERBSdVMx
@@ -100,7 +100,6 @@ const Card = () => {
   };
 
   const tronlinkTest = async () => {
-    var tronweb = window.tronWeb;
     const tx = await tronweb.transactionBuilder.sendTrx(
       'TGupi94VaCpm9DaTvne6WaytYbTLA69m5Y',
       1000000,
@@ -118,41 +117,34 @@ const Card = () => {
     if (type === 'Free') {
       let currentValue = await contract[args].call().call();
       setContractValue(currentValue.toString());
+      console.log(contract);
+
     } else if (type === 'Nonpayable') {
-      // let currentValue = await contract.deleteData().send({
-      //   feeLimit: 1000000,
-      // });
-      // setContractValue(currentValue.toString());
-      console.log('nonpayable ');
+
+      //triggering red
+      var parameter = [{ type: 'string', value: 'MyMessage1' }];
+      const options = {
+        feeLimit: 100000000,
+        callValue: 0,
+      };
+      // tronlink building transaction
+      const transaction = await tronweb.transactionBuilder.triggerSmartContract(
+        contrAdrress,
+        'setMessage(string)',
+        options,
+        parameter,
+        myAddress
+      );
+      //tronlink signing transaction
+      const signedTx = await tronweb.trx.sign(transaction.transaction);
+      //tronlink broadcasting transaction
+      const broastTx = await tronweb.trx.sendRawTransaction(signedTx);
+      //need to handle some error here
+      console.log(broastTx);
     }
   };
 
-  const doSomething = async () => {
-    var parameter = [
-      { type: 'address', value: 'TV3nb5HYFe2xBEmyb3ETe93UGkjAhWyzrs' },
-      { type: 'uint256', value: 100 },
-    ];
-    var options = {
-      feeLimit: 100000000,
-      callValue: 0,
-      tokenValue: 10,
-      tokenId: 1000001,
-    };
-    // const transaction = await tronWeb.transactionBuilder.triggerSmartContract("419e62be7f4f103c36507cb2a753418791b1cdc182", "transfer(address,uint256)", options,
-    //     parameter,"417946F66D0FC67924DA0AC9936183AB3B07C81126");
 
-    const transaction = await tronWeb.transactionBuilder.triggerSmartContract(
-      'TC7Gg5AkhDjiDEuqE1sPkFudRAERBSdVMx',
-      'name()',
-      {},
-      parameter,
-      'TBNZd3tqJuPYTtVGwDeR4wPNgBseX1QbAH'
-    );
-    console.log(transaction);
-
-    //'TC7Gg5AkhDjiDEuqE1sPkFudRAERBSdVMx';
-    //TBNZd3tqJuPYTtVGwDeR4wPNgBseX1QbAH');
-  };
 
   return (
     <div className={classes.cardGrid}>
@@ -203,13 +195,13 @@ const Card = () => {
             Get smart contract details
           </button>
           <div>
-            <button onClick={doSomething}>TESTING</button>
+          
           </div>
           <TronlinkFunctions clicked={tronlinkTest} />
         </div>
 
         <div className={classes.foot}>
-          <h4>App Version - 0.04 beta</h4>
+          <h4>App Version - 0.05 beta</h4>
         </div>
       </div>
     </div>
