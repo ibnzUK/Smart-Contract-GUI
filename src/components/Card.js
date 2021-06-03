@@ -34,7 +34,7 @@ const Card = () => {
   );
   const tronWeb = new TronWeb(fullNode, solidityNode, eventServer, privateKey);
   const [contractValue, setContractValue] = useState(
-    'Smart contract not detected'
+    'null'
   );
   const [contractExtracted, setContractExtracted] = useState([]);
 
@@ -172,9 +172,9 @@ const Card = () => {
 
         <div className={classes.content}>
           <div>
-            <p>{contractValue}</p>
+            {contractValue === 'null' ? <p></p> : <p>{contractValue}</p>}
           </div>
-          <h4>Smart contract name: {contractName}</h4>
+          {contractName === 'null' ? <h4>Enter smart contract address</h4> : <h4>Contract name: {contractName}</h4>}
 
           <div className={classes.functionLi}>
             {fetchedFuncs.map((func) => (

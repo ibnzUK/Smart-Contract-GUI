@@ -8,7 +8,7 @@
 }
 .listGrid {
   display: grid;
-  grid-template-columns: 7em 11em 20em 5em auto;
+  grid-template-columns: auto 11em 20em 2em auto;
 }
 
 .functionLabel {
