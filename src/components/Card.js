@@ -33,18 +33,16 @@ const Card = () => {
     'https://api.shasta.trongrid.io'
   );
   const tronWeb = new TronWeb(fullNode, solidityNode, eventServer, privateKey);
-  const [contractValue, setContractValue] = useState(
-    'null'
-  );
+  const [contractValue, setContractValue] = useState('null');
   const [contractExtracted, setContractExtracted] = useState([]);
 
   useEffect(() => {
     //connecting to ethereum blockchain
-    const ethEnabled = async () => {
+    const tronlinkEnabled = async () => {
       fetchAddressfromTronlink();
     };
 
-    ethEnabled();
+    tronlinkEnabled();
   }, []);
 
   const changeNetworkHandler = (net) => {
@@ -155,6 +153,7 @@ const Card = () => {
   };
   return (
     <div className={classes.cardGrid}>
+        <div className={classes.first_border}></div>
       <div className={classes.card}>
         <div className={classes.header}>
           <div className={classes.headerTop}>
@@ -174,7 +173,11 @@ const Card = () => {
           <div>
             {contractValue === 'null' ? <p></p> : <p>{contractValue}</p>}
           </div>
-          {contractName === 'null' ? <h4>Enter smart contract address</h4> : <h4>Contract name: {contractName}</h4>}
+          {contractName === 'null' ? (
+            <h4>Enter smart contract address</h4>
+          ) : (
+            <h4>Contract name: {contractName}</h4>
+          )}
 
           <div className={classes.functionLi}>
             {fetchedFuncs.map((func) => (
@@ -210,6 +213,7 @@ const Card = () => {
           <h4>App Version - 0.05 beta</h4>
         </div>
       </div>
+      <div className={classes.last_border}></div>
     </div>
   );
 };
