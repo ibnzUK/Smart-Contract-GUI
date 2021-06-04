@@ -26,17 +26,26 @@
   background-color: white;
   color: rgb(5, 117, 65);
 }
+.inputWrapper {
+
+  flex-direction: column;
+}
+.tooDeep {
+text-align: center;
+font-size: 0.7em;
+color: rgb(233, 136, 8);
+}
 
 .functionInput {
   border: none;
   padding: 0.6em;
   text-align: center;
-  
+  margin-bottom: 0.2em;
+  width: 24em;
 }
 .functionInput:focus {
- outline: none;
+  outline: none;
 }
-
 
 .functionCallBtn {
   border: rgb(1, 145, 89) 0.1em solid;

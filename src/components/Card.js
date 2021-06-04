@@ -8,10 +8,10 @@ import TronlinkFunctions from './TronlinkFunctions';
 const TronWeb = require('tronweb');
 let privateKey = process.env.PK;
 const HttpProvider = TronWeb.providers.HttpProvider;
-var tronweb = window.tronWeb;
+let tronweb = window.tronWeb;
 // tronWeb.setHeader({ 'xxxxxxxxxxxxxxxxxxxxxxxx': 'your api key' });
 
-//shasta set message read message  - TC7Gg5AkhDjiDEuqE1sPkFudRAERBSdVMx
+//shasta set message read message  - TPjGUuQfq6R3FMBmsacd6Z5dvAgrD2rz4n
 
 // shasta - TEvrLVLkcDpnSZb9G6AwVnWAR91SbTLBa1
 //nile - TQb1aN3aXVoZM2kikSoZfFbXda4hK8R44w
@@ -33,7 +33,8 @@ const Card = () => {
   const [eventServer, setEventServer] = useState(
     'https://api.shasta.trongrid.io'
   );
-  const tronWeb = new TronWeb(fullNode, solidityNode, eventServer, privateKey);
+  let tronWeb = new TronWeb(fullNode, solidityNode, eventServer, privateKey);
+
   const [contractValue, setContractValue] = useState('null');
   const [contractExtracted, setContractExtracted] = useState([]);
 
@@ -112,36 +113,48 @@ const Card = () => {
   };
 
   const callFunctions = async (args, type) => {
-    let contract = await tronWeb.contract().at(contrAdrress);
+    let contract = await tronweb.contract().at(contrAdrress);
     tronWeb.setAddress(myAddress);
+    console.log(contract);
 
     if (type === 'Free') {
       let currentValue = await contract[args].call().call();
       setContractValue(currentValue.toString());
     } else if (type === 'Nonpayable') {
-      //triggering red
-      const contractFunction = contract.methodInstances[args].functionSelector;
-      let objFromContract = contractExtracted[args].inputs;
-      //checking input objects
-      console.log(objFromContract);
-      console.log(contractFunction);
-      console.log(contract);
-      const parameters = [
-        {
-          ...objFromContract[0],
-          value: 'MY MESSAGE1213132',
-        },
-      ];
-
-      const options = {
-        feeLimit: 100000000,
-        callValue: 0,
-      };
-   
-     
+      //need to take this on the fly
+      // let contract = await tronweb.contract().at('TPjGUuQfq6R3FMBmsacd6Z5dvAgrD2rz4n');
+      // let contract2 = await tronweb.contract().at(contrAdrress);
+ 
+      // console.log(contract);
+      // console.log(contract2);
 
 
-      // tronlink building transaction
+      // tronWeb.setAddress(myAddress);
+
+      let transaction = await contract[args].call().send({
+        feeLimit: 1000000,
+      });
+
+      console.log(transaction);
+      setContractValue('Contract function sucessfully executed');
+
+      // //triggering input functions
+      // const contractFunction = contract.methodInstances[args].functionSelector;
+      // let objFromContract = contractExtracted[args].inputs;
+
+      // const parameters = [
+      //   {
+      //     ...objFromContract[0],
+      //     value: 'NEW CONTRACT',
+      //   },
+      // ];
+
+      // const options = {
+      //   feeLimit: 100000000,
+      //   callValue: 0,
+      // };
+
+      // // tronlink building transaction
       // const transaction = await tronweb.transactionBuilder.triggerSmartContract(
       //   contrAdrress,
       //   contractFunction,
@@ -150,24 +163,19 @@ const Card = () => {
       //   myAddress
       // );
 
-          // tronlink building transaction
-      const transaction = await tronweb.transactionBuilder.triggerSmartContract(
-        contrAdrress,
-        contractFunction,
-        options,
-    
-        myAddress
-      ).send();
-
-
-      //tronlink signing transaction
-      const signedTx = await tronweb.trx.sign(transaction.transaction);
-      //tronlink broadcasting transaction
-      const broastTx = await tronweb.trx.sendRawTransaction(signedTx);
-      //need to handle some error here
-      console.log(broastTx);
+      // //tronlink signing transaction
+      // const signedTx = await tronweb.trx.sign(transaction.transaction);
+      // //tronlink broadcasting transaction
+      // const broastTx = await tronweb.trx.sendRawTransaction(signedTx);
+      // //need to handle some error here
+      // console.log(broastTx);
     }
   };
+
+  const doSomething = async () => {
+
+  };
+
   return (
     <div className={classes.cardGrid}>
       <div className={classes.first_border}></div>
@@ -222,9 +230,10 @@ const Card = () => {
           <button onClick={getContractName} className={classes.contrctButton}>
             Get smart contract details
           </button>
-          <p>TC7Gg5AkhDjiDEuqE1sPkFudRAERBSdVMx</p>
-          <p>TEvrLVLkcDpnSZb9G6AwVnWAR91SbTLBa1</p>
-          <div></div>
+          {/* <p>TPjGUuQfq6R3FMBmsacd6Z5dvAgrD2rz4n</p>
+          <p>TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t</p>
+          <button onClick={doSomething}>test</button>
+          <div></div> */}
           <TronlinkFunctions clicked={tronlinkTest} />
         </div>
         <div className={classes.foot}>
