@@ -20,6 +20,7 @@ var tronweb = window.tronWeb;
 
 const Card = () => {
   const [myAddress, setmyAddress] = useState('Loading...');
+  //leave blank later
   const [contrAdrress, setcontrAdrress] = useState('');
   const [contractName, setcontractName] = useState('null');
   const [fetchedFuncs, setFetchedFuncs] = useState([]);
@@ -123,10 +124,12 @@ const Card = () => {
       let objFromContract = contractExtracted[args].inputs;
       //checking input objects
       console.log(objFromContract);
+      console.log(contractFunction);
+      console.log(contract);
       const parameters = [
         {
           ...objFromContract[0],
-          value: 'MY MESSAGE2',
+          value: 'MY MESSAGE1213132',
         },
       ];
 
@@ -134,15 +137,29 @@ const Card = () => {
         feeLimit: 100000000,
         callValue: 0,
       };
+   
+     
+
 
       // tronlink building transaction
+      // const transaction = await tronweb.transactionBuilder.triggerSmartContract(
+      //   contrAdrress,
+      //   contractFunction,
+      //   options,
+      //   parameters,
+      //   myAddress
+      // );
+
+          // tronlink building transaction
       const transaction = await tronweb.transactionBuilder.triggerSmartContract(
         contrAdrress,
         contractFunction,
         options,
-        parameters,
+    
         myAddress
-      );
+      ).send();
+
+
       //tronlink signing transaction
       const signedTx = await tronweb.trx.sign(transaction.transaction);
       //tronlink broadcasting transaction
@@ -153,7 +170,7 @@ const Card = () => {
   };
   return (
     <div className={classes.cardGrid}>
-        <div className={classes.first_border}></div>
+      <div className={classes.first_border}></div>
       <div className={classes.card}>
         <div className={classes.header}>
           <div className={classes.headerTop}>
@@ -205,10 +222,11 @@ const Card = () => {
           <button onClick={getContractName} className={classes.contrctButton}>
             Get smart contract details
           </button>
+          <p>TC7Gg5AkhDjiDEuqE1sPkFudRAERBSdVMx</p>
+          <p>TEvrLVLkcDpnSZb9G6AwVnWAR91SbTLBa1</p>
           <div></div>
           <TronlinkFunctions clicked={tronlinkTest} />
         </div>
-
         <div className={classes.foot}>
           <h4>App Version - 0.05 beta</h4>
         </div>
