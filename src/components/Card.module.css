@@ -62,10 +62,9 @@
   padding-top: 4em;
 }
 
-.functionLi {
-  /* background-color: brown; */
-  /* padding-left: 5em;
-  padding-right: 5em; */
+.content p {
+  color: green;
+  font-size: 0.9em;
 }
 
 .contrctButton {

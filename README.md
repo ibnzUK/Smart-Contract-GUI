@@ -35,3 +35,17 @@ Feel free to add extra functions or improvements, This helps me to more familiar
 - Sorting functions in to read only , trigger and input
 - Implemented ability to check free contract functions 
 
+## Changes in V 0.05
+
+- Added ability to triger functions without input with tronlink
+- Added input argument number counter
+- Sorting inputs by type
+
+
+## Changes in V 0.06
+
+- Added placeholders for user to identify type and name
+- Mapping inputs as new components 
+- Fixed issue with contract not able to load after quick swap
+- Ability to detect when contract not exist on chain
+- Displaying transaction hash after function trigger

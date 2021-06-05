@@ -4,7 +4,7 @@ import Inputs from './Inputs';
 
 const ContractExtracted = (props) => {
   let fname = props.functionName;
-  // console.log(props.allFunctions[fname].inputs);
+
 
   const functionBtnClicked = (args, fType) => {
     props.callFunctions(args, fType);
@@ -20,14 +20,14 @@ const ContractExtracted = (props) => {
           functionBtnClicked(props.functionName, 'Free');
         }}
       >
-        CALL FREE FUNCTION
+        Call Function (Free)
       </button>
     );
     if (props.inputs) {
       editableFunction = (
         // green input
         <div className={classes.inputWrapper}>
-          {props.allFunctions[fname].inputs.map((func) => (
+          {props.inputs.map((func) => (
             <Inputs
               placeholder={func.type}
               placeholderName={func.name}
@@ -40,10 +40,10 @@ const ContractExtracted = (props) => {
     }
   } else if (props.type === 'Constructor') {
     return null;
-  } else if (props.allFunctions[fname].inputs[0]) {
+  } else if (props.inputs) {
     editableFunction = (
       <div className={classes.inputWrapper}>
-        {props.allFunctions[fname].inputs.map((func) => (
+        {props.inputs.map((func) => (
           <Inputs
             placeholder={func.type}
             placeholderName={func.name}
@@ -61,7 +61,7 @@ const ContractExtracted = (props) => {
           functionBtnClicked(props.functionName, 'Nonpayable');
         }}
       >
-        CALL FUNCTION
+         Call Function (Paid)
       </button>
     );
   }

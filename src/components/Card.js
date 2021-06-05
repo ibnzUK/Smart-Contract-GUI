@@ -82,17 +82,20 @@ const Card = () => {
   const getContractName = async () => {
     fetchAddressfromTronlink();
     try {
-      //   let contract = await tronWeb.contract().at(contrAdrress);
-      //   let result = await contract.name().call();
       let contract = await tronWeb.trx.getContract(contrAdrress);
+
       let contractextracted = await tronWeb.contract().at(contrAdrress);
       let result = await contract.name;
       setcontractName(result);
       setContractExtracted(contractextracted.methodInstances);
       setFetchedFuncs(contract.abi.entrys);
+      setContractValue(``);
     } catch (error) {
       console.error('trigger smart contract error', error);
       setcontractName(error);
+      setFetchedFuncs('');
+      setContractExtracted('');
+      setContractValue('');
     }
   };
 
@@ -113,30 +116,22 @@ const Card = () => {
   };
 
   const callFunctions = async (args, type) => {
-    let contract = await tronweb.contract().at(contrAdrress);
+    let contract = await tronWeb.contract().at(contrAdrress);
     tronWeb.setAddress(myAddress);
-    console.log(contract);
 
     if (type === 'Free') {
       let currentValue = await contract[args].call().call();
       setContractValue(currentValue.toString());
     } else if (type === 'Nonpayable') {
-      //need to take this on the fly
-      // let contract = await tronweb.contract().at('TPjGUuQfq6R3FMBmsacd6Z5dvAgrD2rz4n');
-      // let contract2 = await tronweb.contract().at(contrAdrress);
- 
-      // console.log(contract);
-      // console.log(contract2);
-
-
-      // tronWeb.setAddress(myAddress);
+      let contract = await window.tronWeb.contract().at(contrAdrress);
+      tronWeb.setAddress(myAddress);
 
       let transaction = await contract[args].call().send({
         feeLimit: 1000000,
       });
 
-      console.log(transaction);
-      setContractValue('Contract function sucessfully executed');
+      // console.log(transaction);
+      setContractValue(`Success: ${transaction}`);
 
       // //triggering input functions
       // const contractFunction = contract.methodInstances[args].functionSelector;
@@ -172,9 +167,7 @@ const Card = () => {
     }
   };
 
-  const doSomething = async () => {
-
-  };
+  // const doSomething = async () => {};
 
   return (
     <div className={classes.cardGrid}>
@@ -205,18 +198,20 @@ const Card = () => {
           )}
 
           <div className={classes.functionLi}>
-            {fetchedFuncs.map((func) => (
-              <ContractExtracted
-                functionName={func.name}
-                id={func.id}
-                key={Math.random()}
-                stateMutability={func.stateMutability}
-                type={func.type}
-                inputs={func.inputs}
-                callFunctions={callFunctions}
-                allFunctions={contractExtracted}
-              />
-            ))}
+            {fetchedFuncs
+              ? fetchedFuncs.map((func) => (
+                  <ContractExtracted
+                    functionName={func.name}
+                    id={func.id}
+                    key={Math.random()}
+                    stateMutability={func.stateMutability}
+                    type={func.type}
+                    inputs={func.inputs}
+                    callFunctions={callFunctions}
+                    allFunctions={contractExtracted}
+                  />
+                ))
+              : null}
           </div>
 
           <input
@@ -231,13 +226,16 @@ const Card = () => {
             Get smart contract details
           </button>
           {/* <p>TPjGUuQfq6R3FMBmsacd6Z5dvAgrD2rz4n</p>
+          <p>TEvrLVLkcDpnSZb9G6AwVnWAR91SbTLBa1</p>
           <p>TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t</p>
           <button onClick={doSomething}>test</button>
           <div></div> */}
+
+
           <TronlinkFunctions clicked={tronlinkTest} />
         </div>
         <div className={classes.foot}>
-          <h4>App Version - 0.05 beta</h4>
+          <h4>App Version - 0.06 beta</h4>
         </div>
       </div>
       <div className={classes.last_border}></div>
