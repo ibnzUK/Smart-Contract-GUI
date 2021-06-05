@@ -1,10 +1,14 @@
 .functionInput {
-    border: none;
-    padding: 0.6em;
-    text-align: center;
-    margin-bottom: 0.2em;
-    width: 24em;
-  }
-  .functionInput:focus {
-    outline: none;
-  }
+  border: none;
+  padding: 0.6em;
+  text-align: center;
+  margin-bottom: 0.2em;
+  width: 24em;
+}
+.functionInput:focus {
+  outline: none;
+}
+
+.functionInput::placeholder {
+  color: rgba(43, 43, 43, 0.527);
+}

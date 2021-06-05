@@ -28,7 +28,12 @@ const ContractExtracted = (props) => {
         // green input
         <div className={classes.inputWrapper}>
           {props.allFunctions[fname].inputs.map((func) => (
-            <Inputs placeholder={func.type} />
+            <Inputs
+              placeholder={func.type}
+              placeholderName={func.name}
+              types={props.allFunctions[fname]}
+              key={Math.random()}
+            />
           ))}
         </div>
       );
@@ -39,7 +44,12 @@ const ContractExtracted = (props) => {
     editableFunction = (
       <div className={classes.inputWrapper}>
         {props.allFunctions[fname].inputs.map((func) => (
-          <Inputs placeholder={func.type} />
+          <Inputs
+            placeholder={func.type}
+            placeholderName={func.name}
+            types={props.allFunctions[fname]}
+            key={Math.random()}
+          />
         ))}
       </div>
     );
