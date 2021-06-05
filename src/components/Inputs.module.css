@@ -1,0 +1,10 @@
+.functionInput {
+    border: none;
+    padding: 0.6em;
+    text-align: center;
+    margin-bottom: 0.2em;
+    width: 24em;
+  }
+  .functionInput:focus {
+    outline: none;
+  }

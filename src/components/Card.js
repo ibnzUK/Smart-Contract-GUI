@@ -232,8 +232,8 @@ const Card = () => {
           </button>
           {/* <p>TPjGUuQfq6R3FMBmsacd6Z5dvAgrD2rz4n</p>
           <p>TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t</p>
-          <button onClick={doSomething}>test</button>
-          <div></div> */}
+          <button onClick={doSomething}>test</button> */}
+          <div></div>
           <TronlinkFunctions clicked={tronlinkTest} />
         </div>
         <div className={classes.foot}>
