@@ -167,7 +167,7 @@ const Card = () => {
     }
   };
 
-  // const doSomething = async () => {};
+
 
   return (
     <div className={classes.cardGrid}>
@@ -227,9 +227,8 @@ const Card = () => {
           </button>
           {/* <p>TPjGUuQfq6R3FMBmsacd6Z5dvAgrD2rz4n</p>
           <p>TEvrLVLkcDpnSZb9G6AwVnWAR91SbTLBa1</p>
-          <p>TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t</p>
-          <button onClick={doSomething}>test</button>
-          <div></div> */}
+          <p>TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t</p> */}
+          <div></div>
 
 
           <TronlinkFunctions clicked={tronlinkTest} />

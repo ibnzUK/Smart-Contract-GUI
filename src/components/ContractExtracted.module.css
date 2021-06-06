@@ -8,12 +8,13 @@
 }
 .listGrid {
   display: grid;
-  grid-template-columns: auto 11em 20em 2em auto;
+  grid-template-columns: auto 11em 16em 4em 2em auto;
 }
 
 .functionLabel {
   margin-right: 1em;
   grid-column-start: 2;
+
   border: none;
   background-color: white;
   color: crimson;
@@ -29,6 +30,7 @@
 .inputWrapper {
 
   flex-direction: column;
+  
 }
 .tooDeep {
 text-align: center;
@@ -36,6 +38,23 @@ font-size: 0.7em;
 color: rgb(233, 136, 8);
 }
 
+.runBtnGreen {
+  border: rgba(0, 0, 0, 0.068) 0.1em solid;
+  background-color: rgb(255, 255, 255);
+  border-radius: 0.5em;
+  color: rgb(180, 180, 180);
+  grid-column-start: 4;
+  grid-column-end: 5;
+  width: 3.5em;
+  justify-self: end;
+  height: auto;
+}
+.runBtnGreen:hover {
+  border: rgb(255, 255, 255) 0.1em solid;
+  background-color: rgb(46, 46, 46);
+  cursor: pointer;
+  color: white;
+}
 
 
 .functionCallBtn {
@@ -44,6 +63,7 @@ color: rgb(233, 136, 8);
   border-radius: 0.5em;
   color: rgb(1, 145, 89);
   padding: 0.6em;
+  width: 24em;
 }
 
 .functionCallBtn:hover {
@@ -59,6 +79,7 @@ color: rgb(233, 136, 8);
   border-radius: 0.5em;
   color: rgb(228, 3, 3);
   padding: 0.6em;
+  width: 24em;
 }
 
 .freeFunctionCallBtn:hover {

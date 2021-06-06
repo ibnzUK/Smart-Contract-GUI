@@ -51,6 +51,7 @@ const ContractExtracted = (props) => {
             key={Math.random()}
           />
         ))}
+        
       </div>
     );
   } else {
@@ -79,6 +80,7 @@ const ContractExtracted = (props) => {
           {props.functionName}
         </button>
         {editableFunction}
+        {  props.inputs ?  <button className={classes.runBtnGreen}>Call</button> : null}
       </ul>
     </div>
   );
