@@ -79,14 +79,15 @@ a {
   color: white;
   font-size: 1em;
 }
-
-.contrctButton2 {
+.contrctButtonDisabled {
   padding: 1em;
   border-radius: 0.5em;
-  background: rgb(90, 18, 158);
+  background: rgba(202, 202, 202, 0.795);
   color: white;
   font-size: 1em;
+  border: none
 }
+
 
 .contrctButton:hover {
   background: #161616; /* Green */

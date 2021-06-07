@@ -19,7 +19,7 @@ let tronweb = window.tronWeb;
 //MAIN USDT - TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t
 
 const Card = () => {
-  const [myAddress, setmyAddress] = useState('Loading...');
+  const [myAddress, setmyAddress] = useState(null);
   //leave blank later
   const [contrAdrress, setcontrAdrress] = useState('');
   const [contractName, setcontractName] = useState('null');
@@ -69,7 +69,6 @@ const Card = () => {
   };
 
   const fetchAddressfromTronlink = async () => {
-    setmyAddress('Loading...');
     try {
       setTimeout(() => {
         if (window.tronWeb) {
@@ -192,7 +191,11 @@ const Card = () => {
           </p>
         ) : (
           <p className={classes.myAddress}>
-            <a href="https://chrome.google.com/webstore/detail/tronlink%EF%BC%88%E6%B3%A2%E5%AE%9D%E9%92%B1%E5%8C%85%EF%BC%89/ibnejdfjmmkpcnlpebklmnkoeoihofec" target="_blank" rel="noreferrer">
+            <a
+              href="https://chrome.google.com/webstore/detail/tronlink%EF%BC%88%E6%B3%A2%E5%AE%9D%E9%92%B1%E5%8C%85%EF%BC%89/ibnejdfjmmkpcnlpebklmnkoeoihofec"
+              target="_blank"
+              rel="noreferrer"
+            >
               TRONLINK NOT DETECTED
             </a>
           </p>
@@ -233,13 +236,19 @@ const Card = () => {
           <div>
             <br></br>
           </div>
-          <button onClick={getContractName} className={classes.contrctButton}>
-            Get smart contract details
-          </button>
-          <p>TPjGUuQfq6R3FMBmsacd6Z5dvAgrD2rz4n</p>
+          {myAddress === null || myAddress === false ? (
+            <button className={classes.contrctButtonDisabled}>
+              Get smart contract details
+            </button>
+          ) : (
+            <button onClick={getContractName} className={classes.contrctButton}>
+              Get smart contract details
+            </button>
+          )}
+          {/* <p>TPjGUuQfq6R3FMBmsacd6Z5dvAgrD2rz4n</p>
           <p>TEvrLVLkcDpnSZb9G6AwVnWAR91SbTLBa1</p>
           <p>TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t</p>
-          <div></div>
+          <div></div> */}
 
           <TronlinkFunctions clicked={tronlinkTest} />
         </div>
