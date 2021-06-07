@@ -69,14 +69,19 @@ const Card = () => {
   };
 
   const fetchAddressfromTronlink = async () => {
+    setmyAddress('Loading...')
     try {
       setTimeout(() => {
-        setmyAddress(window.tronWeb.defaultAddress.base58);
+        if(window.tronWeb) {
+
+          setmyAddress(window.tronWeb.defaultAddress.base58);
+        } else {setmyAddress(null);}
       }, 1000);
     } catch (error) {
       console.error('not able to fetch ', error);
       setmyAddress(error);
     }
+
   };
 
   const getContractName = async () => {
@@ -183,9 +188,7 @@ const Card = () => {
           </div>
           <h1>SMART CONTRACT GUI</h1>
         </div>
-        <p className={classes.myAddress}>
-          Network (<b>{network}</b>): {myAddress}
-        </p>
+        {myAddress ? <p className={classes.myAddress}>Network (<b>{network}</b>): {myAddress}</p> : <p className={classes.myAddress}><a href="https://chrome.google.com/webstore/detail/tronlink%EF%BC%88%E6%B3%A2%E5%AE%9D%E9%92%B1%E5%8C%85%EF%BC%89/ibnejdfjmmkpcnlpebklmnkoeoihofec" >TRONLINK NOT DETECTED</a></p>}
 
         <div className={classes.content}>
           <div>
@@ -227,8 +230,8 @@ const Card = () => {
           </button>
           {/* <p>TPjGUuQfq6R3FMBmsacd6Z5dvAgrD2rz4n</p>
           <p>TEvrLVLkcDpnSZb9G6AwVnWAR91SbTLBa1</p>
-          <p>TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t</p> */}
-          <div></div>
+          <p>TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t</p>
+          <div></div> */}
 
 
           <TronlinkFunctions clicked={tronlinkTest} />
