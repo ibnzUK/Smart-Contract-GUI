@@ -49,3 +49,4 @@ Feel free to add extra functions or improvements, This helps me to more familiar
 - Fixed issue with contract not able to load after quick swap
 - Ability to detect when contract not exist on chain
 - Displaying transaction hash after function trigger
+

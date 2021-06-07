@@ -1,13 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
 import classes from './ContractExtracted.module.css';
 import Inputs from './Inputs';
 
 const ContractExtracted = (props) => {
-  let fname = props.functionName;
+  const [placeholderVal, setplaceholderVal] = useState('');
 
+  let fname = props.functionName;
+  let receivedContractValues = '';
 
   const functionBtnClicked = (args, fType) => {
     props.callFunctions(args, fType);
+  };
+
+  const inputReceiver = (event) => {
+    event.preventDefault();
+    // console.log(event.target.value);
+    receivedContractValues = event.target.value;
+  };
+
+  const contractTriggerHandler = () => {
+    // console.log(receivedContractValues);
+    setplaceholderVal('');
+
+    const parameters = [
+      {
+        ...props.inputs[props.inputs.length - 1],
+        value: receivedContractValues,
+      },
+    ];
+    functionBtnClicked(props.functionName, parameters);
   };
 
   let editableFunction = <p>Unknow Type</p>;
@@ -33,6 +54,8 @@ const ContractExtracted = (props) => {
               placeholderName={func.name}
               types={props.allFunctions[fname]}
               key={Math.random()}
+              inputChanger={inputReceiver}
+              holder={placeholderVal}
             />
           ))}
         </div>
@@ -49,9 +72,10 @@ const ContractExtracted = (props) => {
             placeholderName={func.name}
             types={props.allFunctions[fname]}
             key={Math.random()}
+            inputChanger={inputReceiver}
+            holder={placeholderVal}
           />
         ))}
-        
       </div>
     );
   } else {
@@ -62,7 +86,7 @@ const ContractExtracted = (props) => {
           functionBtnClicked(props.functionName, 'Nonpayable');
         }}
       >
-         Call Function (Paid)
+        Call Function (Paid)
       </button>
     );
   }
@@ -80,7 +104,14 @@ const ContractExtracted = (props) => {
           {props.functionName}
         </button>
         {editableFunction}
-        {  props.inputs ?  <button className={classes.runBtnGreen}>Call</button> : null}
+        {props.inputs ? (
+          <button
+            className={classes.runBtnGreen}
+            onClick={contractTriggerHandler}
+          >
+            Call
+          </button>
+        ) : null}
       </ul>
     </div>
   );

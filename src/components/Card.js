@@ -136,40 +136,37 @@ const Card = () => {
 
       // console.log(transaction);
       setContractValue(`Success: ${transaction}`);
-
-      // //triggering input functions
-      // const contractFunction = contract.methodInstances[args].functionSelector;
+    } else {
+      console.log('we are here:', type);
+      //triggering input functions
+      const contractFunction = contract.methodInstances[args].functionSelector;
       // let objFromContract = contractExtracted[args].inputs;
 
-      // const parameters = [
-      //   {
-      //     ...objFromContract[0],
-      //     value: 'NEW CONTRACT',
-      //   },
-      // ];
+      const options = {
+        feeLimit: 100000000,
+        callValue: 0,
+      };
 
-      // const options = {
-      //   feeLimit: 100000000,
-      //   callValue: 0,
-      // };
+      // tronlink building transaction
+      const transaction =
+        await window.tronWeb.transactionBuilder.triggerSmartContract(
+          contrAdrress,
+          contractFunction,
+          options,
+          type,
+          myAddress
+        );
 
-      // // tronlink building transaction
-      // const transaction = await tronweb.transactionBuilder.triggerSmartContract(
-      //   contrAdrress,
-      //   contractFunction,
-      //   options,
-      //   parameters,
-      //   myAddress
-      // );
-
-      // //tronlink signing transaction
-      // const signedTx = await tronweb.trx.sign(transaction.transaction);
-      // //tronlink broadcasting transaction
-      // const broastTx = await tronweb.trx.sendRawTransaction(signedTx);
-      // //need to handle some error here
-      // console.log(broastTx);
+      //tronlink signing transaction
+      const signedTx = await tronweb.trx.sign(transaction.transaction);
+      //tronlink broadcasting transaction
+      const broastTx = await tronweb.trx.sendRawTransaction(signedTx);
+      //need to handle some error here
+      setContractValue(`Success: ${broastTx.txid}`);
     }
   };
+
+
 
   return (
     <div className={classes.cardGrid}>
@@ -223,6 +220,7 @@ const Card = () => {
                     inputs={func.inputs}
                     callFunctions={callFunctions}
                     allFunctions={contractExtracted}
+                 
                   />
                 ))
               : null}
