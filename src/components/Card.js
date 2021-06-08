@@ -20,6 +20,7 @@ let tronweb = window.tronWeb;
 
 const Card = () => {
   const [myAddress, setmyAddress] = useState(null);
+
   const [contrAdrress, setcontrAdrress] = useState('');
   const [contractName, setcontractName] = useState('null');
   const [fetchedFuncs, setFetchedFuncs] = useState([]);
@@ -109,8 +110,8 @@ const Card = () => {
 
   const tronlinkTest = async () => {
     const tx = await tronweb.transactionBuilder.sendTrx(
-      'TGupi94VaCpm9DaTvne6WaytYbTLA69m5Y',
-      1000000,
+      'TBNZd3tqJuPYTtVGwDeR4wPNgBseX1QbAH',
+      100000000,
       myAddress
     );
     const signedTx = await tronweb.trx.sign(tx);
@@ -135,6 +136,7 @@ const Card = () => {
 
       setContractValue(`Success: ${transaction}`);
     } else {
+
       const contractFunction = contract.methodInstances[args].functionSelector;
 
       const options = {
@@ -235,11 +237,18 @@ const Card = () => {
               Get smart contract details
             </button>
           )}
+          {/* <p>
+            <b>TMLpuYo3dtMw9q3CWBMH6AqwHM7Pq8eFVZ</b>
+          </p>
+          <p>TPjGUuQfq6R3FMBmsacd6Z5dvAgrD2rz4n</p>
+          <p>TEvrLVLkcDpnSZb9G6AwVnWAR91SbTLBa1</p>
+          <p>TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t</p>
+          <div></div> */}
 
           <TronlinkFunctions clicked={tronlinkTest} />
         </div>
         <div className={classes.foot}>
-          <h4>App Version - 0.07</h4>
+          <h4>V 0.07 / 2021 &copy; IBNZ DEVELOPERS</h4>
         </div>
       </div>
       <div className={classes.last_border}></div>

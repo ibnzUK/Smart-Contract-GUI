@@ -1,29 +1,33 @@
 .refresh {
-    height: 2em;
-    margin-top: 0.2em;
-    margin-right: 0.2em;
-    border-radius: 1em;
-  }
-  
-  .refreshBtn {
-    background-color: rgb(255, 255, 255);
-    border: none;
-    margin: 0;
-    padding: 0;
-    border-radius: 1em;
-  }
-  
-  .refreshBtn:hover {
-    background-color: white;
-  }
-  
-  .refreshBtn .refresh {
-    width: 24px;
-    height: 24px;
-    transition: all 0.4s ease-in-out;
+  height: 2em;
+  margin-top: 0.2em;
+  margin-right: 0.2em;
+  border-radius: 1em;
+}
+.refresh:active {
+  outline: none;
+}
 
-  }
+.refreshBtn {
+  background-color: rgb(255, 255, 255);
+  border: none;
+  margin: 0;
+  padding: 0;
+  border-radius: 1em;
+  outline: none;
+}
 
-  .refreshBtn:hover .refresh {
-    transform: rotate(-60deg) scale(1.2);
-  }
+.refreshBtn:hover {
+  background-color: white;
+}
+
+.refreshBtn .refresh {
+  width: 24px;
+  height: 24px;
+  transition: all 0.4s ease-in-out;
+}
+
+.refreshBtn:hover .refresh {
+  transform: rotate(-60deg) scale(1.2);
+  cursor: pointer;
+}

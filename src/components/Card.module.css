@@ -87,12 +87,20 @@ a {
   font-size: 1em;
   border: none
 }
-
+.contrctButtonDisabled:focus {
+  outline: none;
+}
 
 .contrctButton:hover {
   background: #161616; /* Green */
   color: rgb(255, 255, 255);
+  cursor: pointer;
 }
+
+.contrctButton:focus {
+  outline: none;
+}
+
 
 .inputField {
   color: rgb(119, 119, 119);

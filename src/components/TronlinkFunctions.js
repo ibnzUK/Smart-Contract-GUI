@@ -1,18 +1,18 @@
 import React from 'react';
 import classes from './TronlinkFunctions.module.css';
-import tronlinkLogo from '../assets/tronlinkIcon.png';
+import cupIcon from '../assets/cupIcon.png';
 
 const TronlinkFunctions = (props) => {
   return (
     <div className={classes.experimental}>
-      <button onClick={props.clicked} className={classes.tronlinkButton}>
+      <button onClick={props.clicked} className={classes.buyCoffeBtn}>
         <img
-          src={tronlinkLogo}
-          alt="tronlink icon"
-          className={classes.tronlinkLogo}
+          src={cupIcon}
+          alt="cup icon"
+          className={classes.cupIcon}
         />
-        <div>
-          <p>Experimental Tronlink Function</p>
+        <div>      
+          <p>Like this project? Buy me a coffee (<span className={classes.trx}>100 TRX</span>)</p>
         </div>
       </button>
     </div>
