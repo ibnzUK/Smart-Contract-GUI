@@ -20,7 +20,6 @@ let tronweb = window.tronWeb;
 
 const Card = () => {
   const [myAddress, setmyAddress] = useState(null);
-  //leave blank later
   const [contrAdrress, setcontrAdrress] = useState('');
   const [contractName, setcontractName] = useState('null');
   const [fetchedFuncs, setFetchedFuncs] = useState([]);
@@ -39,7 +38,7 @@ const Card = () => {
   const [contractExtracted, setContractExtracted] = useState([]);
 
   useEffect(() => {
-    //connecting to ethereum blockchain
+    //connecting to tron blockchain
     const tronlinkEnabled = async () => {
       fetchAddressfromTronlink();
     };
@@ -134,13 +133,9 @@ const Card = () => {
         feeLimit: 1000000,
       });
 
-      // console.log(transaction);
       setContractValue(`Success: ${transaction}`);
     } else {
-      console.log('we are here:', type);
-      //triggering input functions
       const contractFunction = contract.methodInstances[args].functionSelector;
-      // let objFromContract = contractExtracted[args].inputs;
 
       const options = {
         feeLimit: 100000000,
@@ -165,8 +160,6 @@ const Card = () => {
       setContractValue(`Success: ${broastTx.txid}`);
     }
   };
-
-
 
   return (
     <div className={classes.cardGrid}>
@@ -220,7 +213,6 @@ const Card = () => {
                     inputs={func.inputs}
                     callFunctions={callFunctions}
                     allFunctions={contractExtracted}
-                 
                   />
                 ))
               : null}
@@ -243,16 +235,11 @@ const Card = () => {
               Get smart contract details
             </button>
           )}
-          {/* <p><b>TMLpuYo3dtMw9q3CWBMH6AqwHM7Pq8eFVZ</b></p>
-          <p>TPjGUuQfq6R3FMBmsacd6Z5dvAgrD2rz4n</p>
-          <p>TEvrLVLkcDpnSZb9G6AwVnWAR91SbTLBa1</p>
-          <p>TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t</p>
-          <div></div> */}
 
           <TronlinkFunctions clicked={tronlinkTest} />
         </div>
         <div className={classes.foot}>
-          <h4>App Version - 0.06 beta</h4>
+          <h4>App Version - 0.07</h4>
         </div>
       </div>
       <div className={classes.last_border}></div>

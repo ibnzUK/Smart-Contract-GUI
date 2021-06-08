@@ -50,3 +50,8 @@ Feel free to add extra functions or improvements, This helps me to more familiar
 - Ability to detect when contract not exist on chain
 - Displaying transaction hash after function trigger
 
+## Changes in V 0.07
+
+- Added ability to submit multiple fields at once 
+
+

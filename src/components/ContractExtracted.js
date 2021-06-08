@@ -5,7 +5,6 @@ import Inputs from './Inputs';
 const ContractExtracted = (props) => {
   const [placeholderVal, setplaceholderVal] = useState('');
 
-
   let fname = props.functionName;
   let receivedContractValues = '';
 
@@ -13,29 +12,14 @@ const ContractExtracted = (props) => {
     props.callFunctions(args, fType);
   };
 
-  const inputReceiver = (event) => {
-    event.preventDefault();
-    console.log(event.target.value);
-    receivedContractValues = event.target.value;
-
-
+  const inputReceiver = (val) => {
+    receivedContractValues = val;
   };
 
   const contractTriggerHandler = () => {
-    // console.log(receivedContractValues);
     setplaceholderVal('');
-
-    const parameters = [
-      {
-        ...props.inputs[props.inputs.length - 1],
-        value: receivedContractValues,
-      },
-    ];
-    functionBtnClicked(props.functionName, parameters);
+    functionBtnClicked(props.functionName, receivedContractValues);
   };
-
-
-
 
   let editableFunction = <p>Unknow Type</p>;
 
@@ -62,6 +46,7 @@ const ContractExtracted = (props) => {
               key={Math.random()}
               inputChanger={inputReceiver}
               holder={placeholderVal}
+              inputs={props.inputs}
             />
           ))}
         </div>
@@ -80,6 +65,7 @@ const ContractExtracted = (props) => {
             key={Math.random()}
             inputChanger={inputReceiver}
             holder={placeholderVal}
+            inputs={props.inputs}
           />
         ))}
       </div>
