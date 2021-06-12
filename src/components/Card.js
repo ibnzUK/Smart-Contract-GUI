@@ -11,9 +11,12 @@ const HttpProvider = TronWeb.providers.HttpProvider;
 let tronweb = window.tronWeb;
 // tronWeb.setHeader({ 'xxxxxxxxxxxxxxxxxxxxxxxx': 'your api key' });
 
-//shasta set message read message  - TPjGUuQfq6R3FMBmsacd6Z5dvAgrD2rz4n
+
+//Smart Contract Examples 
+//
+//SHASTA Set message, Read message, Read Nnumber, Change Data (add +3 to nmy number)  - TPjGUuQfq6R3FMBmsacd6Z5dvAgrD2rz4n
 //shasta - many inputs TMLpuYo3dtMw9q3CWBMH6AqwHM7Pq8eFVZ
-// shasta - TEvrLVLkcDpnSZb9G6AwVnWAR91SbTLBa1
+//shasta - TEvrLVLkcDpnSZb9G6AwVnWAR91SbTLBa1
 //nile - TQb1aN3aXVoZM2kikSoZfFbXda4hK8R44w
 //MAINNET - TSYmsMxx2m9b5o8ZDLXT2fAGSXNY2RgDL6
 //MAIN USDT - TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t
@@ -120,6 +123,10 @@ const Card = () => {
   };
 
   const callFunctions = async (args, type) => {
+    console.log(args);
+    console.log(type);
+
+
     let contract = await tronWeb.contract().at(contrAdrress);
     tronWeb.setAddress(myAddress);
 
@@ -161,6 +168,37 @@ const Card = () => {
       //need to handle some error here
       setContractValue(`Success: ${broastTx.txid}`);
     }
+  };
+
+  const tesFunction = async () => {
+    // console.log('test');
+    let contract = await tronWeb.contract().at(contrAdrress);
+        console.log(contract);
+    // tronWeb.setAddress(myAddress);
+    // const contractFunction = contract.methodInstances[args].functionSelector;
+
+    // const options = {
+    //   feeLimit: 100000000,
+    //   callValue: 0,
+    // };
+
+    // // tronlink building transaction
+    // const transaction =
+    //   await window.tronWeb.transactionBuilder.triggerSmartContract(
+    //     contrAdrress,
+    //     contractFunction,
+    //     options,
+    //     type,
+    //     myAddress
+    //   );
+
+    // //tronlink signing transaction
+    // const signedTx = await tronweb.trx.sign(transaction.transaction);
+    // //tronlink broadcasting transaction
+    // const broastTx = await tronweb.trx.sendRawTransaction(signedTx);
+    // //need to handle some error here
+    // setContractValue(`Success: ${broastTx.txid}`);
+
   };
 
   return (
@@ -237,14 +275,15 @@ const Card = () => {
               Get smart contract details
             </button>
           )}
-          {/* <p>
+          <p>
             <b>TMLpuYo3dtMw9q3CWBMH6AqwHM7Pq8eFVZ</b>
           </p>
           <p>TPjGUuQfq6R3FMBmsacd6Z5dvAgrD2rz4n</p>
+          <br></br>
           <p>TEvrLVLkcDpnSZb9G6AwVnWAR91SbTLBa1</p>
           <p>TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t</p>
-          <div></div> */}
-
+          <div></div>
+<button onClick={tesFunction}>TEST</button>
           <TronlinkFunctions clicked={tronlinkTest} />
         </div>
         <div className={classes.foot}>

@@ -14,7 +14,7 @@ const Inputs = (props) => {
     const valueForElemnt = inputs.find(
       ({ name }) => name === nameInputRef.current.name
     );
-    const index = inputs.findIndex((fruit) => fruit === valueForElemnt);
+    const index = inputs.findIndex((element) => element === valueForElemnt);
 
     inputs[index] = {
       name: nameInputRef.current.name,
