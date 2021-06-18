@@ -2,28 +2,45 @@ import React, { useState, useRef } from 'react';
 import classes from './Inputs.module.css';
 
 const Inputs = (props) => {
+  // console.log(props.types.abi.stateMutability);
+
   const nameInputRef = useRef();
   const [inputValue, setInputValue] = useState('');
-
   let inputs = props.inputs;
 
   const inputChangeHandler = (event) => {
     event.preventDefault();
     const enteredName = nameInputRef.current.value;
+    console.log(enteredName);
 
-    const valueForElemnt = inputs.find(
-      ({ name }) => name === nameInputRef.current.name
-    );
-    const index = inputs.findIndex((element) => element === valueForElemnt);
+    if (props.types.abi.stateMutability === 'View') {
+      console.log('do something here');
+      setInputValue(event.target.value);
+      inputs[0] = {
+        name: nameInputRef.current.name,
+        type: props.placeholder,
+        value: enteredName,
+      };
 
-    inputs[index] = {
-      name: nameInputRef.current.name,
-      type: props.placeholder,
-      value: enteredName,
-    };
+// console.log(inputs);
+props.inputChanger(inputs);
+      
+    } else {
+      const valueForElemnt = inputs.find(
+        ({ name }) => name === nameInputRef.current.name
+      );
 
-    setInputValue(event.target.value);
-    props.inputChanger(inputs);
+      const index = inputs.findIndex((element) => element === valueForElemnt);
+
+      inputs[index] = {
+        name: nameInputRef.current.name,
+        type: props.placeholder,
+        value: enteredName,
+      };
+
+      setInputValue(event.target.value);
+      props.inputChanger(inputs);
+    }
   };
 
   return (

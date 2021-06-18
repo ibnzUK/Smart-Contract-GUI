@@ -35,8 +35,10 @@ const ContractExtracted = (props) => {
       </button>
     );
     if (props.inputs) {
+
       editableFunction = (
         // green input
+      
         <div className={classes.inputWrapper}>
           {props.inputs.map((func) => (
             <Inputs
@@ -56,6 +58,8 @@ const ContractExtracted = (props) => {
     return null;
   } else if (props.inputs) {
     editableFunction = (
+      //red input
+      
       <div className={classes.inputWrapper}>
         {props.inputs.map((func) => (
           <Inputs
