@@ -126,8 +126,12 @@ const Card = () => {
     let contract = await tronWeb.contract().at(contrAdrress);
     tronWeb.setAddress(myAddress);
 
-    if (type === 'Free') {
-      console.log(args);
+    if (type[0].ftype === 'View') {
+
+      let currentValue = await contract[args](type[0].value).call();
+      setContractValue(currentValue.toString());
+    } else if (type === 'Free') {
+
       let currentValue = await contract[args].call().call();
       setContractValue(currentValue.toString());
     } else if (type === 'Nonpayable') {
@@ -148,8 +152,6 @@ const Card = () => {
       };
 
       // tronlink building transaction
-      console.log('type:', type);
-      console.log('args:', args);
       const transaction =
         await window.tronWeb.transactionBuilder.triggerSmartContract(
           contrAdrress,
@@ -163,40 +165,9 @@ const Card = () => {
       const signedTx = await tronweb.trx.sign(transaction.transaction);
       //tronlink broadcasting transaction
       const broastTx = await tronweb.trx.sendRawTransaction(signedTx);
-      //need to handle some error here
-      // console.log(`Success: ${transaction}`);
-      // console.log(`Success: ${broastTx}`);
 
-      console.log(`Success: ${transaction}`);
-      // setContractValue(`Success: ${broastTx.txid}`);
+      setContractValue(`Success: ${broastTx.txid}`);
     }
-  };
-
-  const tesFunction = async () => {
-    let contract = await window.tronWeb.contract().at(contrAdrress);
-    
-    tronWeb.setAddress(myAddress);
-
-    // console.log(contract);
-    // let currentValue = await contract.myArray().call('2');
-
-    const parameter = [{type: "uint256", value: 2}];
-
-    const transaction = await tronWeb.transactionBuilder.triggerSmartContract(
-      contrAdrress,
-      'myArray()',
-      {},
-      parameter,
-      myAddress
-    );
-
-    console.log(transaction);
-
-
-
-
-
-    
   };
 
   return (
@@ -280,12 +251,11 @@ const Card = () => {
           <br></br>
           <p>TEvrLVLkcDpnSZb9G6AwVnWAR91SbTLBa1</p>
           <p>TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t</p>
-          <div></div>
-          <button onClick={tesFunction}>TEST</button> */}
+          <div></div> */}
           <TronlinkFunctions clicked={tronlinkTest} />
         </div>
         <div className={classes.foot}>
-          <h4>V 0.07 / 2021 &copy; IBNZ DEVELOPERS</h4>
+          <h4>V 0.08 / 2021 &copy; IBNZ DEVELOPERS</h4>
         </div>
       </div>
       <div className={classes.last_border}></div>

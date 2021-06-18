@@ -11,15 +11,16 @@ const Inputs = (props) => {
   const inputChangeHandler = (event) => {
     event.preventDefault();
     const enteredName = nameInputRef.current.value;
-    console.log(enteredName);
+   
 
     if (props.types.abi.stateMutability === 'View') {
-      console.log('do something here');
+
       setInputValue(event.target.value);
       inputs[0] = {
         name: nameInputRef.current.name,
         type: props.placeholder,
         value: enteredName,
+        ftype: 'View'
       };
 
 // console.log(inputs);

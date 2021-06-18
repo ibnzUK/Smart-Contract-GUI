@@ -57,4 +57,11 @@ Feel free to add extra functions or improvements, This helps me to more familiar
 - Fixed styling
 - Optimised for mobile experience
 
+## Changes in V 0.08
+
+- Added ability to view array elements
+- Added ability to submit arrays on payable functions
+- Implemented Return values for array trigering
+
+
 
