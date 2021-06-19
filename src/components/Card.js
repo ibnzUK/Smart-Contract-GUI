@@ -14,13 +14,12 @@ let tronweb = window.tronWeb;
 
 //Smart Contract Examples
 //
-//SHASTA Set message, Read message, Read Nnumber, Change Data (add +3 to nmy number)  - TPjGUuQfq6R3FMBmsacd6Z5dvAgrD2rz4n
-//shasta - many inputs TMLpuYo3dtMw9q3CWBMH6AqwHM7Pq8eFVZ
-//shasta - TEvrLVLkcDpnSZb9G6AwVnWAR91SbTLBa1
-//shasta - TLu171ZAKDRGRcnQipLYkyfQGdAJzN7Abv  (Array Demo)
-//nile - TQb1aN3aXVoZM2kikSoZfFbXda4hK8R44w
-//MAINNET - TSYmsMxx2m9b5o8ZDLXT2fAGSXNY2RgDL6
-//MAIN USDT - TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t
+// * SHASTA   - `TWZYhE3WWAupJQ7KxKiwQDPkn1BGeM7PDJ` (Multiple Input Test, Set message, Read the message, Read Number, Change Data, Addition)
+// * SHASTA - `TKWrw9VyRuvqg9n4oLdPMhbDLLgGutt1YV`  (Array Demo for payable and nonpayable functions)
+// * NILE - `TEjqDGMwDHqrXCzq7fWH8J63L1MWhc1msw` (NILE - Multiple Input Test, Set message, Read the message, Read Number, Change Data, Addition)
+// * MAINNET - `TSYmsMxx2m9b5o8ZDLXT2fAGSXNY2RgDL6` (HummingDrop trc20 Token Airdrop)
+// * MAIN  - `TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t` (USDT Token)
+
 
 const Card = () => {
   const [myAddress, setmyAddress] = useState(null);
@@ -195,7 +194,7 @@ const Card = () => {
         ) : (
           <p className={classes.myAddress}>
             <a
-              href="https://chrome.google.com/webstore/detail/tronlink%EF%BC%88%E6%B3%A2%E5%AE%9D%E9%92%B1%E5%8C%85%EF%BC%89/ibnejdfjmmkpcnlpebklmnkoeoihofec"
+              href="https://www.tronlink.org/"
               target="_blank"
               rel="noreferrer"
             >
