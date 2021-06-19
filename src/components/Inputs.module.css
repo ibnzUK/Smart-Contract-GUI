@@ -6,9 +6,11 @@
   margin-right: 0.5em;
   height: auto;
   margin: 0.1em;
+
 }
 .functionInput:focus {
   outline: none;
+
 }
 
 .functionInput::placeholder {

@@ -5,7 +5,7 @@
 
 .state1 {
   margin-top: 0.5em;
-  background-color: rgb(255, 255, 255);
+  background-color: rgba(255, 255, 255, 0);
   border: none;
   color: #a7a7a7;
   margin-right: 0.3em;
@@ -32,7 +32,7 @@
 }
 
 .state2 {
-  background-color: rgb(255, 255, 255);
+  background-color: rgba(255, 255, 255, 0);
   border-top: none;
   border-left: none;
   border-right: none;

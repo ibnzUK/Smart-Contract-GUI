@@ -4,6 +4,7 @@ import ContractExtracted from './ContractExtracted';
 import NetworkStates from './NetworkStates';
 import Refresh from './Refresh';
 import TronlinkFunctions from './TronlinkFunctions';
+import tronLogo from '../assets/tronLogo.svg';
 
 const TronWeb = require('tronweb');
 let privateKey = process.env.PK;
@@ -127,11 +128,9 @@ const Card = () => {
     tronWeb.setAddress(myAddress);
 
     if (type[0].ftype === 'View') {
-
       let currentValue = await contract[args](type[0].value).call();
       setContractValue(currentValue.toString());
     } else if (type === 'Free') {
-
       let currentValue = await contract[args].call().call();
       setContractValue(currentValue.toString());
     } else if (type === 'Nonpayable') {
@@ -173,6 +172,11 @@ const Card = () => {
   return (
     <div className={classes.cardGrid}>
       <div className={classes.first_border}></div>
+      <div className={classes.underCard}></div>
+      <div className={classes.cardFrame}></div>
+      <div className={classes.logo}>
+        <img src={tronLogo} alt="cup icon" className={classes.cupIcon} />
+      </div>
       <div className={classes.card}>
         <div className={classes.header}>
           <div className={classes.headerTop}>
@@ -244,14 +248,7 @@ const Card = () => {
               Get smart contract details
             </button>
           )}
-          {/* <p>
-            <b>TLu171ZAKDRGRcnQipLYkyfQGdAJzN7Abv</b>
-          </p>
-          <p>TPjGUuQfq6R3FMBmsacd6Z5dvAgrD2rz4n</p>
-          <br></br>
-          <p>TEvrLVLkcDpnSZb9G6AwVnWAR91SbTLBa1</p>
-          <p>TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t</p>
-          <div></div> */}
+ 
           <TronlinkFunctions clicked={tronlinkTest} />
         </div>
         <div className={classes.foot}>
