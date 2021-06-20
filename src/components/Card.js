@@ -20,7 +20,6 @@ let tronweb = window.tronWeb;
 // * MAINNET - `TSYmsMxx2m9b5o8ZDLXT2fAGSXNY2RgDL6` (HummingDrop trc20 Token Airdrop)
 // * MAIN  - `TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t` (USDT Token)
 
-
 const Card = () => {
   const [myAddress, setmyAddress] = useState(null);
 
@@ -42,21 +41,10 @@ const Card = () => {
   const [contractExtracted, setContractExtracted] = useState([]);
   // const [tronLinkState, setTronLinkState] = useState({});
 
-
   useEffect(() => {
-    
-
-
-
-
     //connecting to tron blockchain
     const tronlinkEnabled = async () => {
-
-      //checking if tronlink is enabled 
-  
-
-
-
+      //checking if tronlink is enabled
 
       fetchAddressfromTronlink();
     };
@@ -188,7 +176,7 @@ const Card = () => {
       <div className={classes.underCard}></div>
       <div className={classes.cardFrame}></div>
       <div className={classes.logo}>
-        <img src={tronLogo} alt="cup icon" className={classes.cupIcon} />
+        <img src={tronLogo} alt="tron logo" className={classes.cupIcon} />
       </div>
       <div className={classes.card}>
         <div className={classes.header}>
@@ -261,7 +249,7 @@ const Card = () => {
               Get smart contract details
             </button>
           )}
- 
+
           <TronlinkFunctions clicked={tronlinkTest} />
         </div>
         <div className={classes.foot}>
