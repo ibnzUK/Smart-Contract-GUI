@@ -17,7 +17,7 @@ Feel free to add extra functions or improvements, This helps me to familiarise m
 * SHASTA - `TKWrw9VyRuvqg9n4oLdPMhbDLLgGutt1YV`  (Array Demo for payable and nonpayable functions)
 * NILE - `TEjqDGMwDHqrXCzq7fWH8J63L1MWhc1msw` (NILE - Multiple Input Test, Set message, Read the message, Read Number, Change Data, Addition)
 * MAINNET - `TSYmsMxx2m9b5o8ZDLXT2fAGSXNY2RgDL6` (HummingDrop trc20 Token Airdrop)
-* MAIN  - `TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t` (USDT Token)
+* MAINNET  - `TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t` (USDT Token)
 
 
 

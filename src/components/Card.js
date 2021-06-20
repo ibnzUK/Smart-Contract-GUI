@@ -40,10 +40,24 @@ const Card = () => {
 
   const [contractValue, setContractValue] = useState('null');
   const [contractExtracted, setContractExtracted] = useState([]);
+  // const [tronLinkState, setTronLinkState] = useState({});
+
 
   useEffect(() => {
+    
+
+
+
+
     //connecting to tron blockchain
     const tronlinkEnabled = async () => {
+
+      //checking if tronlink is enabled 
+  
+
+
+
+
       fetchAddressfromTronlink();
     };
 
