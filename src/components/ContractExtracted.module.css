@@ -8,7 +8,7 @@
 }
 .listGrid {
   display: grid;
-  grid-template-columns: auto 11em 16em 4em 2em auto;
+  grid-template-columns: auto 15em 16em 4em 2em auto;
 }
 
 .functionLabel {
@@ -21,6 +21,7 @@
 }
 
 .nonfunctionLabel {
+
   margin-right: 1em;
   grid-column-start: 2;
   border: none;

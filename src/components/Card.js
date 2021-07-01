@@ -240,15 +240,11 @@ const Card = () => {
           <div>
             <br></br>
           </div>
-          {myAddress === null || myAddress === false ? (
-            <button className={classes.contrctButtonDisabled}>
-              Get smart contract details
-            </button>
-          ) : (
+        
             <button onClick={getContractName} className={classes.contrctButton}>
               Get smart contract details
             </button>
-          )}
+     
 
           <TronlinkFunctions clicked={tronlinkTest} />
         </div>
